@@ -4,6 +4,12 @@
     组长:zky
 
     组员:fyd,lhh,zjq
+
+## 文档
+
+- [开发文档](https://github.com/kzoacn/DS2017/blob/master/manual.md)
+- 用户手册
+
 ## 日程表(待讨论)
 - ddl：第12周
  
