@@ -1,4 +1,4 @@
-# 说明文档(v1.0)
+# 说明文档(v1.1)
 
 
 ## 命名规范
@@ -25,11 +25,10 @@
 |lib/shared_ptr.hpp|智能指针|
 |lib/utility.hpp|pair类|
 |lib/Date.hpp|日期类|
-|File.hpp|文件|
 |FileManager.hpp|文件管理|
 |Exceptions.hpp|异常处理|
 |LoginManager.hpp|登陆管理|
-|TicketLevel.hpp|车票等级|
+|Ticket.hpp|车票类|
 |User.hpp|普通用户|
 |Admin.hpp|管理员用户|
 |Station.hpp|车站|
@@ -48,11 +47,6 @@
 |Date|operator+(Date a,int b)|返回a往后b分钟的时刻|
 |string|toString(Date a)|显示日期，精确到分钟|
 
-### File类
-|返回值|方法|描述|
-|:------:|:-----:|:-----:|
-|void|open(string fileName)|打开文件|
-|void|close()|关闭文件|
 
 ### FileManager类
 |返回值|方法|描述|
@@ -91,6 +85,16 @@
 |User|getUser(string id)|获取用户|
 |Admin|getAdmin(string id)|获取管理员|
 
+### Ticket类
+|返回值|方法|描述|
+|:------:|:-----:|:-----:|
+|double|cost()|返回票价|
+|double|train()|返回车次|
+|Station|start()|返回起点|
+|Station|target()|返回终点|
+|Date|startDate()|返回起点时间|
+|Date|targetDate()|返回终点时间|
+
 ### User类
 |返回值|方法|描述|
 |:------:|:-----:|:-----:|
@@ -100,7 +104,8 @@
 |vector< Train >|queryTrainByStaion(Station station)|通过途径车站查询车次信息|
 |vector< Train >|queryTrainByDate(Date date)|通过出发日期查询车次信息|
 |vector< Train >|queryTrainByID(string id)|通过车次编号查询车次信息|
-|vector< string >|queryInfo()|查询自身信息|
+|vector< Ticket >|queryTicket()|查询自身购票|
+|string|queryInfo()|查询自身信息|
 |bool|buyTicket(string,Station start,Station target,TicketLevel,int num)|买票|
 |bool|refundTicket(string,Station start,Station target,TicketLevel,int num)|退票|
 |bool|updateInfo(string pwd,string name)|更新信息|
@@ -116,7 +121,7 @@
 |void|startSale(Train train)|开始卖票|
 |void|endSale(Train train)|停止卖票|
 |vector< string >|readUser(string id)|查看用户信息|
-|string|readLog()|查看系统日志|
+|vector< string >|readLog()|查看系统日志|
 
 ### Station类
 |返回值|方法|描述|
