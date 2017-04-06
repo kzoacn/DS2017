@@ -30,8 +30,8 @@
  - lhh
    1. lib/ * - lib/ Date
    2. User,Admin   
-  - zjq
-    1. lib/ Date
+ - zjq
+   1. lib/ Date
    
 ## 代码风格,命名规范
 - 小驼峰命名法
