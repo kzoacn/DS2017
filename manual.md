@@ -1,4 +1,4 @@
-# 说明文档(v1.2)
+# 说明文档(v1.3)
 
 
 ## 命名规范
@@ -25,8 +25,9 @@
 |lib/shared_ptr.hpp|智能指针|
 |lib/utility.hpp|pair类|
 |lib/Date.hpp|日期类|
-|FileManager.hpp|文件管理|
-|Log.hpp|日志|
+|iFileManager.hpp|输入文件管理|
+|oFileManager.hpp|输出文件管理|
+|~~Log.hpp~~|~~日志~~|
 |LogManager.hpp|日志管理|
 |Exceptions.hpp|异常处理|
 |~~LoginManager.hpp~~|~~登陆管理~~|
@@ -48,22 +49,23 @@
 |int|operator-(Date a,Date b)|返回两个时间相差的分钟数|
 |Date|operator+(Date a,int b)|返回a往后b分钟的时刻|
 |string|toString(Date a)|显示日期，精确到分钟|
-|void|read(FileManager&)|读取自身信息|
+|void|read(iFileManager&)|读取自身信息|
 
 
-### FileManager类
+### iFileManager类
 |返回值|方法|描述|
 |:------:|:-----:|:-----:|
 |void|openFile(string id)|打开文件|
 |void|saveFile()|保存文件|
 |void|closeFile()|关闭文件|
-|int|readInt()|从文件中读入一个整数|
-|double|readDouble()|从文件中读入一个实数|
-|string|readString()|从文件中读入一个字符串|
-|void|appendInt(int)|向文件中写入一个整数|
-|void|appendString(string)|向文件中写入一个字符串|
-|void|appendDouble(double)|向文件中写入一个实数|
-
+|iFileManager&|operator>>(T x)|读入T|
+### oFileManager类
+|返回值|方法|描述|
+|:------:|:-----:|:-----:|
+|void|openFile(string id)|打开文件|
+|void|saveFile()|保存文件|
+|void|closeFile()|关闭文件|
+|oFileManager&|operator<<(T x)|输出T|
 
 ### Exceptions类
 |类名称|描述|
@@ -86,7 +88,7 @@
 |TicketLevel|level()|返回车票种类|
 |Date|startDate()|返回起点时间|
 |Date|targetDate()|返回终点时间|
-|void|read(FileManager&)|读取自身信息|
+|void|read(iFileManager&)|读取自身信息|
 
 ### User类
 |返回值|方法|描述|
@@ -96,13 +98,13 @@
 |vector< Train >|queryTrainByTarget(Station station)|通过终点查询车次信息|
 |vector< Train >|queryTrainByStaion(Station station)|通过途径车站查询车次信息|
 |vector< Train >|queryTrainByDate(Date date)|通过出发日期查询车次信息|
-|vector< Train >|queryTrainByID(string id)|通过车次编号查询车次信息|
+|vector< Train >|queryTrainByID(str   ing id)|通过车次编号查询车次信息|
 |vector< Ticket >|queryTicket()|查询自身购票|
 |string|queryInfo()|查询自身信息|
 |bool|buyTicket(string,Station start,Station target,TicketLevel,int num)|买票|
 |bool|refundTicket(string,Station start,Station target,TicketLevel,int num)|退票|
 |bool|updateInfo(string pwd,string name)|更新信息|
-|void|read(FileManager&)|读取自身信息|
+|void|read(iFileManager&)|读取自身信息|
 |pair< string , bool >|reg(string id,string pwd,string name)|注册一个用户名为id，密码pwd，昵称为name的用户|
 |pair< string , bool >|login(string id,string pwd)|登陆，返回错误信息和是否成功|
 |pair< string , bool >|updateInfo(string id,string pwd,string name)|将用户名为id的密码修改为pwd，昵称修改为name|
@@ -126,7 +128,7 @@
 |:------:|:-----:|:-----:|
 |string|getName()|返回车站名称|
 |string|getCity()|返回所在城市名称|
-|void|read(FileManager&)|读取自身信息|
+|void|read(iFileManager&)|读取自身信息|
 
 ### Train类
 |返回值|方法|描述|
@@ -142,7 +144,7 @@
 |void|startSale(Train train)|开始卖票|
 |void|endSale(Train train)|停止卖票|
 |bool|canSell()|是否可以买票|
-|void|read(FileManager&)|读取自身信息|
+|void|read(iFileManager&)|读取自身信息|
 
 ### RailwayMinistry类
 |返回值|方法|描述|
@@ -162,8 +164,8 @@
 |vector< Ticket >|buyTicket(string id,Train train,Station start,Station target,TicketLevel,int num)|id用户买票|
 |bool|refundTicket(string id,Train train,Station start,Station target,TicketLevel,int num)|id用户退票|
 |bool|updateInfo(string id,string pwd,string name)|id用户更新信息|
-|void|read(FileManager&)|读取自身信息|
+|void|read(iFileManager&)|读取自身信息|
 |Log|readUser(string id)|查看用户信息|
 |bool|isAdmin(string id)|判断是否为管理员|
-|Log|readLog()|查看系统日志|
+|vector< string >|readLog()|查看系统日志|
 
