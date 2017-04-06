@@ -23,15 +23,15 @@
  - zky
    1. Qt
    2. 框架
-   3. RailwayMinistry,Train,Station,Ticket
+   3.  RailwayMinistry,Train,Station,Ticket
  - fyd
-   1. 码框架
-   2. FileManager,LogManager
+   1.  码框架
+   2.  FileManager,LogManager
  - lhh
-   1. lib/ * - lib/ Date
-   2. User,Admin   
+   1.  lib/ * - lib/ Date
+   2.  User,Admin   
  - zjq
-   1. lib/ Date
+   1.  lib/ Date
    
 ## 代码风格,命名规范
 - 小驼峰命名法
