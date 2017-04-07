@@ -1,5 +1,6 @@
 #include <fstream>
 #include <cstring>
+#include <iostream>
 #define string std::string
 #define ifstream std::ifstream
 #define ofstream std::ofstream
@@ -10,25 +11,10 @@ const string logfile = "log.txt";
 
 class InputOfAscll {
 	private:
-		int Integer;
-		double Double;
-		string String;
 		ifstream fin;
 	public:
 	InputOfAscll(string s = inputfile) {
 		fin.open(s.c_str()); 
-	}
-	int nextInt() {
-		fin >> Integer;
-		return Integer;
-	}
-	double nextDouble() {
-		fin >> Double;
-		return Double;
-	}
-	string nextString() {
-		fin >> String;
-		return String;
 	}
 	friend InputOfAscll & operator >> (InputOfAscll & cin, int & A) {
 		cin.fin >> A;
@@ -50,25 +36,10 @@ class InputOfAscll {
 
 class OutputOfAscll {
 	private:
-		int Integer;
-		double Double;
-		string String;
 		ofstream fout;
 	public:
 	OutputOfAscll(string s = outputfile) {
 		fout.open(s.c_str()); 
-	}
-	int nextInt() {
-		fout << Integer;
-		return Integer;
-	}
-	double nextDouble() {
-		fout << Double;
-		return Double;
-	}
-	string nextString() {
-		fout << String;
-		return String;
 	}
 	friend OutputOfAscll & operator << (OutputOfAscll & cout, int A) {
 		cout.fout << A;
@@ -83,6 +54,55 @@ class OutputOfAscll {
 		return cout;
 	}
 	~OutputOfAscll() {
+		fout.flush();
+		fout.close();
+	}
+};
+
+class InputOfBinary {
+	private:
+		ifstream fin;
+	public:
+	InputOfBinary(string s = logfile) {
+		fin.open(s.c_str(), std::ios::binary);
+	}
+	friend InputOfBinary & operator >> (InputOfBinary & cin, int & A) {
+		cin.fin.read((char *) (& A), sizeof A);
+		return cin;
+	}
+	friend InputOfBinary & operator >> (InputOfBinary & cin, double & A) {
+		cin.fin.read((char *) (& A), sizeof A);
+		return cin;
+	}
+	friend InputOfBinary & operator >> (InputOfBinary & cin, string & A) {
+		cin.fin.read((char *) (& A), 256);
+		return cin;
+	}
+	~InputOfBinary() {
+		fin.close();
+	}
+};
+
+class OutputOfBinary {
+	private:
+		ofstream fout;
+	public:
+	OutputOfBinary(string s = outputfile) {
+		fout.open(s.c_str(), std::ios::binary); 
+	}
+	friend OutputOfBinary & operator << (OutputOfBinary & cout, const int & A) {
+		cout.fout.write((char *) (& A), sizeof A);
+		return cout;
+	}
+	friend OutputOfBinary & operator << (OutputOfBinary & cout, const double & A) {
+		cout.fout.write((char *) (& A), sizeof A);
+		return cout;
+	}
+	friend OutputOfBinary & operator << (OutputOfBinary & cout, const string & A) {
+		cout.fout.write((char *) (& A), 256);
+		return cout;
+	}
+	~OutputOfBinary() {
 		fout.flush();
 		fout.close();
 	}
