@@ -81,13 +81,13 @@
 
 |返回值|方法|描述|
 |:------:|:-----:|:-----:|
-|double|cost()|返回票价|
-|double|train()|返回车次|
-|Station|start()|返回起点|
-|Station|target()|返回终点|
-|TicketLevel|level()|返回车票种类|
-|Date|startDate()|返回起点时间|
-|Date|targetDate()|返回终点时间|
+|double|getCost()|返回票价|
+|double|getTrain()|返回车次|
+|Station|getStart()|返回起点|
+|Station|getTarget()|返回终点|
+|TicketLevel|getLevel()|返回车票种类|
+|Date|getStartDate()|返回起点时间|
+|Date|getTargetDate()|返回终点时间|
 |void|read(iFileManager&)|读取自身信息|
 
 ### User类
