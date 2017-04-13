@@ -25,7 +25,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    src/main.cpp
+    src/main.cpp \
+    logindialog.cpp \
+    testwindow.cpp
 
 HEADERS  += mainwindow.h \
     src/lib/algo.hpp \
@@ -39,6 +41,10 @@ HEADERS  += mainwindow.h \
     src/LoginManager.hpp \
     src/Station.hpp \
     src/Train.hpp \
-    src/User.hpp
+    src/User.hpp \
+    logindialog.h \
+    testwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    logindialog.ui \
+    testwindow.ui
