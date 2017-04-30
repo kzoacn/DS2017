@@ -1,27 +1,38 @@
+ï»¿#pragma once
+
 #include "Station.hpp"
-#include "Date.hpp"
+#include "lib/Date.hpp"
+//#include "Ticket.hpp"
+using namespace sjtu;
 enum TicketLevel{
-	SECOND_SEAT,//¶þµÈ×ù
-	FIRST_SEAT,//Ò»µÈ×ù
-	BUSINESS_SEAT,//ÉÌÎñ×ù
-	SPECIAL_SEAT,//ÌØµÈ×ù
-	NO_SEAT,//ÎÞ×ù
-	SOFT_SEAT,//Èí×ù
-	HARD_SEAT//Ó²×ù
+	SECOND_SEAT,//äºŒç­‰åº§
+	FIRST_SEAT,//ä¸€ç­‰åº§
+	BUSINESS_SEAT,//å•†åŠ¡åº§
+	SPECIAL_SEAT,//ç‰¹ç­‰åº§
+	NO_SEAT,//æ— åº§
+	SOFT_SEAT,//è½¯åº§
+	HARD_SEAT//ç¡¬åº§
 };
 
 class Ticket{
 private:
-	TickketLevel level;
+    TicketLevel level;
 	string train;
 	double cost;
 	Station start,target;
-	Date stateDate,targetDate;
+    Date startDate,targetDate;
 public:
 	Ticket(){}
 	Ticket(const Station &s,const Station &t,const double &c,const Date &sd,const Date &td,const string &tn,const TicketLevel &l):
-		start(s),target(t),cost(c),sd(startDate),td(targetDate),tn(train),level(l){}
-	const double& getCost()const{
+        start(s),target(t),cost(c),startDate(sd),targetDate(td),train(tn),level(l){}
+    bool operator==(const Ticket &oth)const{
+        return level==oth.level&&train==oth.train
+                &&cost==oth.cost&&start==oth.start
+                &&target==oth.target
+                &&startDate==oth.startDate
+                &&targetDate==oth.targetDate;
+    }
+    const double& getCost()const{
 		return cost;
 	}
 	const string& getTrain()const{

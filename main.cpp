@@ -1,6 +1,7 @@
 ﻿#include "mainwindow.h"
 #include "logindialog.h"
 #include "testwindow.h"
+#include "src/RailwayMinistry.hpp"
 #include <QApplication>
 #include <QDialog>
 #include <QTextCodec>
@@ -16,6 +17,7 @@ int main(int argc, char *argv[])
     w.show();
     loginDialog lgin;
     lgin.show();
+    RailwayMinistry rm;
 
 
 

@@ -1,22 +1,25 @@
-#include "Staion.hpp"
+﻿#pragma once
+
+#include "Station.hpp"
 #include "Ticket.hpp"
-#include "lib/vector"
-#include "lib/Date"
+#include "lib/vector.hpp"
+#include "lib/Date.hpp"
 class Train{
 private:
 	string id;
-	bool sale;
+    bool sale,isSold;
 	vector<Station>way;
 	vector<Date>date;
 	vector<vector<double> >price;
 	vector<vector<int> >restTicket;
 public:
-	Train(string _id,vector<Staion> _way,vector<Date>_date,vector<vector<double> >_price,vector<vector<int> >_restTicket):
-		id(_id),way(_way),date(_date),price(_price),restTicket(_restTicket){sale=false;}
+    Train(){}
+    Train(string _id,vector<Station> _way,vector<Date>_date,vector<vector<double> >_price,vector<vector<int> >_restTicket):
+        id(_id),way(_way),date(_date),price(_price),restTicket(_restTicket){sale=isSold=false;}
 	Station getStart(){
 		return way.front();
 	}
-	Statoin getTarget(){
+    Station getTarget(){
 		return way.back();
 	}
 	vector<Station> getWay(){
@@ -33,31 +36,36 @@ public:
 			}
 		}
 		return y-x;
-	}
-	Date getTime(Station station){
-		for(int i=0;i<way.size();i++)
-			if(way[i]==staion)
-				return date[i];
-		throw "No such station!";
-	}
+    }
+    Date getTime(Station station){
+        for(int i=0;i<way.size();i++)
+            if(way[i]==station)
+                return date[i];
+        throw "No such station!";
+    }
+    Date getStartTime(){
+        return date.front();
+    }
 	int getRestTicket(Station a,Station b,TicketLevel level){
 		int ans=int(2e9),start=0;
 		for(int i=0;i<way.size();i++){
 			if(way[i]==a)start=1;
 			if(way[i]==b)break;
 			if(start)
-				ans=min(ans,restTicket[i]);
+                ans=min(ans,restTicket[i][level]);
 		}
 		return ans;
 	}
-	void buyTicket(Station a,Station b,TicketLevel level,int num){
+    Ticket buyTicket(Station a,Station b,TicketLevel level){
+        isSold=true;
 		int start=0;
 		for(int i=0;i<way.size();i++){
 			if(way[i]==a)start=1;
 			if(way[i]==b)break;
 			if(start)
-				restTicket[i]-=num;
+                restTicket[i][level]--;
 		}
+        return Ticket(a,b,getCost(a,b,level),getTime(a),getTime(b),id,level);
 	}
 	void refundTicket(Station a,Station b,TicketLevel level,int num){
 		int start=0;
@@ -65,7 +73,7 @@ public:
 			if(way[i]==a)start=1;
 			if(way[i]==b)break;
 			if(start)
-				restTicket[i]+=num;
+                restTicket[i][level]+=num;
 		}
 	}
 	void startSale(){
@@ -77,6 +85,9 @@ public:
 	bool canSell(){
 		return sale;
 	}
+    bool hasSold(){
+        return isSold;
+    }
 	string getID(){
 		return id;
 	}

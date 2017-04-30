@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #ifndef SJTU_DATE_HPP
 #define SJTU_DATE_HPP
@@ -6,7 +6,6 @@
 namespace sjtu {
 	class Date {
 		class date {
-			//Ö»±íÊ¾Äê·İ£¬²»ÓÃÀ´±íÊ¾²îÖµ
 			class year {
 				int val;
 			public:
@@ -18,7 +17,6 @@ namespace sjtu {
 				bool isLeap() {
 					return (val % 400 == 0) || (val % 4 == 0 && val % 100);
 				}
-				//Á½¸öÄê·İ
 				int operator-(year ex) {
 					return val - ex.val;
 				}
@@ -36,7 +34,6 @@ namespace sjtu {
 				}
 			};
 
-			//valÎª1-based
 			class month {
 				int val;
 			public:
@@ -53,7 +50,6 @@ namespace sjtu {
 				}
 			};
 
-			//valÎª1-based
 			class day {
 				int val;
 			public:
@@ -76,7 +72,6 @@ namespace sjtu {
 				}
 			};
 
-			//hour ºÍ minute Îª1-based
 			class time {
 				int hour;
 				int minute;
@@ -109,7 +104,6 @@ namespace sjtu {
 			day d;
 			time t;
 
-			//repairĞèÒª±£Ö¤a < b
 			int repair(date a, date b) {
 				int cnt = 0;
 				if (a.y.isLeap() && a.m <= 2) ++cnt;
@@ -142,7 +136,7 @@ namespace sjtu {
 			}
 			friend date operator+(date a, int add) {
 				date temp = a;
-				temp.d += (add / 1440) + (temp.t + (add % 1440)); // t operator+ ¸Ä±ä×Ô¼ºÍ¬Ê±·µ»ØÖµ
+				temp.d += (add / 1440) + (temp.t + (add % 1440)); // t operator+ æ”¹å˜è‡ªå·±åŒæ—¶è¿”å›å€¼
 				temp.d += daySum[int(temp.m) - 1];
 				temp.m = 1;
 				while (temp.d > 366) {
@@ -183,13 +177,20 @@ namespace sjtu {
 	public:
 		Date() {}
 		Date(const date& dt) :dt(dt) {}
-		Date(const Date& ex) :dt(ex.dt) {}
-		//¶ÔDate a b µÄÏÈºóÃ»ÓĞÇø·Ö£¬ ¿ÉÒÔ·µ»Ø¸ºÖµ
-		friend int operator-(Date a, Date b) {
-			if (a.dt > b.dt) return a.dt - b.dt;
-			else return -(b.dt - a.dt); // date::operator- ±ØĞë±£Ö¤Ç°Ãæ´óÓÚºóÃæ
-		}
-		//int b ĞèÒª±£Ö¤·Ç¸º£¨ºóĞø¿´Çé¿öÌí¼Ó¿ÉÒÔÎª¸ºµÄÇé¿ö£©
+        Date(const Date& ex) :dt(ex.dt) {}
+        friend int operator-(Date a, Date b) {
+            if (a.dt > b.dt) return a.dt - b.dt;
+            else return -(b.dt - a.dt);
+        }
+        friend bool operator<(Date a, Date b) {
+            return a-b<0;
+        }
+        friend bool operator<=(Date a, Date b) {
+            return a-b<=0;
+        }
+        friend bool operator==(Date a, Date b) {
+            return a-b==0;
+        }
 		friend Date operator+(Date a, int b) {
 			return Date(a.dt + b);
 		}

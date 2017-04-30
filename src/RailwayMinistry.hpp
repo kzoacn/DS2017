@@ -1,44 +1,86 @@
+﻿#pragma once
+#include "lib/map.hpp"
+#include "lib/set.hpp"
+#include "lib/vector.hpp"
+#include "lib/algo.hpp"
+#include "lib/Date.hpp"
+#include "Train.hpp"
 class RailwayMinistry{
 private:
 
 	map<string,string>pwdMap;
 	map<string,string>nameMap;
-	map<string,bool>adminMap;
-	vector<Train>allTrain;
-	
+    map<string,bool>adminMap;
+    vector<Train>allTrain;
+    map<string,Train>trainMap;
+    map<pair<Station,Station>,set<string> >stTrain;
+    map<string,vector<Ticket> >ticketMap;
 public:
-	vector<Train>getTrainByST(Station a,Station b,Date date){
-	
+    vector<Train>getTrainByST(Station a,Station b,Date date){
+        if(stTrain.count(make_pair(a,b))){
+            set<string>tmp=stTrain[make_pair(a,b)];
+            vector<Train>ans;
+            for(auto id:tmp){
+                Train train=getTrainByID(id);
+                if(train.getStartTime()<=date)
+                    ans.push_back(train);
+            }
+            return ans;
+        }
+        return vector<Train>();
 	}
 	Train getTrainByID(string id){
-	
+        return trainMap[id];
 	}
 	void addTrain(Train train){
-	
+        vector<Station>way=train.getWay();
+        trainMap[train.getID()]=train;
+        for(int i=0;i<way.size();i++){
+            for(int j=i+1;j<way.size();j++){
+                stTrain[make_pair(way[i],way[j])].insert(train.getID());
+            }
+        }
 	}
 	void updateTrain(Train train){
-	
+        removeTrain(train.getID());
+        addTrain(train);
 	}
 	void removeTrain(string id){
-	
+        Train train=trainMap[id];
+        vector<Station>way=train.getWay();
+        trainMap.erase(id);
+        for(int i=0;i<way.size();i++){
+            for(int j=i+1;j<way.size();j++){
+                stTrain[make_pair(way[i],way[j])].erase(train.getID());
+            }
+        }
 	}
-	void startSale(string id){
-	
+    void startSale(string id){
+        trainMap[id].startSale();
 	}
-	void endSale(string id){
-	
+    bool endSale(string id){
+        if(trainMap[id].hasSold()){
+            return false;
+        }
+        trainMap[id].endSale();
+        return true;
 	}
-	vector<Ticket> queryTicket(string id){
-	
-	}
-	string queryInfo(string id){
-	
-	}
-	bool buyTicket(string id,string trainid,Station a,Station b,TicketLevel levle,int num){
-	
+
+
+    vector<Ticket> queryTicket(string id){
+        return ticketMap[id];
+    }
+    Ticket buyTicket(string id,string trainid,Station a,Station b,TicketLevel level){
+        Ticket ticket=trainMap[trainid].buyTicket(a,b,level);
+        ticketMap[id].push_back(ticket);
 	}
 	bool refund(string id,Ticket ticket){
-		
+        vector<Ticket>&tickets=ticketMap[id];
+        if(find(tickets.begin(),tickets.end(),ticket)!=tickets.end()){
+            tickets.erase(find(tickets.begin(),tickets.end(),ticket));
+            return true;
+        }
+        return false;
 	}
 	bool updateInfo(string id,string pwd,string name){
 		pwdMap[id]=pwd;

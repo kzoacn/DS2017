@@ -27,7 +27,11 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     src/main.cpp \
     logindialog.cpp \
-    testwindow.cpp
+    testwindow.cpp \
+    src/Judge.cpp \
+    src/Test.cpp \
+    src/zky_test.cpp \
+    TrainBoom/filter.cpp
 
 HEADERS  += mainwindow.h \
     src/lib/algo.hpp \
@@ -38,13 +42,17 @@ HEADERS  += mainwindow.h \
     src/lib/vector.hpp \
     src/Admin.hpp \
     src/FileManager.hpp \
-    src/LoginManager.hpp \
     src/Station.hpp \
     src/Train.hpp \
     src/User.hpp \
     logindialog.h \
-    testwindow.h
+    testwindow.h \
+    src/RailwayMinistry.hpp \
+    src/Ticket.hpp
 
 FORMS    += mainwindow.ui \
     logindialog.ui \
     testwindow.ui
+
+DISTFILES += \
+    src/zky_test.exe
