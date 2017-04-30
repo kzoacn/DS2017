@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+
 #include <fstream>
 #include <cstring>
 #include <iostream>
@@ -8,7 +9,7 @@
 #include "lib/map.hpp"
 #include "lib/algo.hpp"
 
-#define string std::string
+//#define string std::string
 #define ifstream std::ifstream
 #define ofstream std::ofstream
 #define fstream std::fstream
@@ -18,7 +19,7 @@ const string outputfile = "output.txt";
 const string logfile = "log.txt";
 
 namespace sjtu {
-
+/*
 	class InputOfAscll {
 
 		private:
@@ -46,7 +47,7 @@ namespace sjtu {
 		}
 	
 		friend InputOfAscll & operator >> (InputOfAscll & cin, string & A) {
-            //cin.fin >> A;
+            cin.fin >> A;
 			return cin;
 		}
 
@@ -94,7 +95,7 @@ namespace sjtu {
 		}
 	
 	};
-
+*/
 	bool isBlank(char c) {
 		return c == ' ' || c == '\n' || c == '\r' || c == '\t' || c == '\0';
 	}
@@ -125,19 +126,59 @@ namespace sjtu {
 			return cin;
 		}
 	
-		friend InputOfBinary & operator >> (InputOfBinary & cin, string & A) {
-			int m = 0;
-			char t = ' ';
-			while (isBlank(t)) cin >> t;
-			while (!isBlank(t)) {
-				std::cout << m << " " << t << std::endl;
-				A[m++] = t;
-				cin >> t;
-			}
-			A[m] = '\0';
-			return cin;
-		}
-	
+        friend InputOfBinary & operator >> (InputOfBinary & cin, string & A) {
+            int len;
+            cin>>len;
+            A="";
+            for(int i=0;i<len;i++){
+                char c;cin>>c;
+                A+=c;
+            }
+            return cin;
+        }
+
+        template<class T1,class T2>
+        friend InputOfBinary & operator >> (InputOfBinary & cin, pair<T1,T2> & A) {
+            cin>>A.first>>A.second;
+            return cin;
+        }
+
+        template<class T>
+        friend InputOfBinary & operator >> (InputOfBinary & cin, vector<T> & A) {
+            int len;
+            cin>>len;
+            A.clear();
+            for(int i=0;i<len;i++){
+                T c;cin>>c;
+                A.push_back(c);
+            }
+            return cin;
+        }
+        template<class T>
+        friend InputOfBinary & operator >> (InputOfBinary & cin, set<T> & A) {
+            int len;//TODO
+            cin>>len;
+            A.clear();
+            for(int i=0;i<len;i++){
+                T c;cin>>c;
+                A.insert(c);
+            }
+            return cin;
+        }
+        template<class T1,class T2>
+        friend InputOfBinary & operator >> (InputOfBinary & cin, map<T1,T2> & A) {
+            int len;//TODO
+            cin>>len;
+            A.clear();
+            for(int i=0;i<len;i++){
+                T1 a;T2 b;
+                cin>>a>>b;
+                A[a]=b;
+            }
+            return cin;
+        }
+
+
 		~InputOfBinary() {
 			fin.close();
 		}
@@ -170,14 +211,40 @@ namespace sjtu {
 			return cout;
 		}
 	
-		friend OutputOfBinary & operator << (OutputOfBinary & cout, const string & A) {
-			cout << ' ';
-			for (int i = 0; !isBlank(A[i]); i++) {
-				cout << A[i];
-			}
-			cout << ' ';
-			return cout;
-		}
+        friend OutputOfBinary & operator << (OutputOfBinary & cout, const string & A) {
+            cout<<(int)A.length();
+            for(int i=0;i<A.length();i++)
+                cout<<A[i];
+            return cout;
+        }
+
+        template<class T>
+        friend OutputOfBinary & operator << (OutputOfBinary & cout, const vector<T> & A) {
+            cout<<(int)A.size();
+            for(int i=0;i<A.length();i++)
+                cout<<A[i];
+            return cout;
+        }
+        template<class T>
+        friend OutputOfBinary & operator << (OutputOfBinary & cout, const set<T> & A) {
+            cout<<(int)A.size();
+            for(auto x:A)
+                cout<<x;
+            return cout;
+        }
+        template<class T1,class T2>
+        friend OutputOfBinary & operator << (OutputOfBinary & cout, const map<T1,T2> & A) {
+            cout<<(int)A.size();
+            for(auto x:A)
+                cout<<x;
+            return cout;
+        }
+
+        template<class T1,class T2>
+        friend OutputOfBinary & operator << (OutputOfBinary & cout, const pair<T1,T2> & A) {
+            cout<<A.first<<A.second;
+            return cout;
+        }
 	
 		~OutputOfBinary() {
 			fout.flush();

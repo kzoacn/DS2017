@@ -1,16 +1,18 @@
 ﻿#pragma once
+#include "FileManager.hpp"
 #include "lib/map.hpp"
 #include "lib/set.hpp"
 #include "lib/vector.hpp"
 #include "lib/algo.hpp"
 #include "lib/Date.hpp"
 #include "Train.hpp"
+using namespace sjtu;
 class RailwayMinistry{
 private:
 
 	map<string,string>pwdMap;
 	map<string,string>nameMap;
-    map<string,bool>adminMap;
+    map<string,int>adminMap;
     vector<Train>allTrain;
     map<string,Train>trainMap;
     map<pair<Station,Station>,set<string> >stTrain;
@@ -92,4 +94,16 @@ public:
 	bool isAdmin(string id){
 		return adminMap.count(id);
 	}
+
+    void readFromFile(string input="railway_ministry"){
+ /*       InputOfBinary fin(input);
+        fin>>pwdMap
+        >>nameMap
+        >>adminMap
+        >>allTrain
+        >>trainMap
+        >>stTrain
+        >>ticketMap;
+*/
+    }
 };

@@ -53,5 +53,5 @@ public:
 	}
 	const Date& getTargetDate()const{
 		return targetDate;
-	}
+    }
 };
