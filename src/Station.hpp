@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 
+
 class Station{
 private:
     string id;

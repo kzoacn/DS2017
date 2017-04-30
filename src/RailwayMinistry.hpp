@@ -67,9 +67,12 @@ public:
 	}
 
 
-    vector<Ticket> queryTicket(string id){
-        return ticketMap[id];
+    /*void queryTicket(string id){
+
     }
+    string queryInfo(string id){
+
+    }*/
     Ticket buyTicket(string id,string trainid,Station a,Station b,TicketLevel level){
         Ticket ticket=trainMap[trainid].buyTicket(a,b,level);
         ticketMap[id].push_back(ticket);

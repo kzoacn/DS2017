@@ -25,13 +25,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    src/main.cpp \
     logindialog.cpp \
-    testwindow.cpp \
-    src/Judge.cpp \
-    src/Test.cpp \
-    src/zky_test.cpp \
-    TrainBoom/filter.cpp
+    testwindow.cpp
 
 HEADERS  += mainwindow.h \
     src/lib/algo.hpp \

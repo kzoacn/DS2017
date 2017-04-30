@@ -3,6 +3,10 @@
 #include <fstream>
 #include <cstring>
 #include <iostream>
+#include "lib/vector.hpp"
+#include "lib/set.hpp"
+#include "lib/map.hpp"
+#include "lib/algo.hpp"
 
 #define string std::string
 #define ifstream std::ifstream
@@ -42,7 +46,7 @@ namespace sjtu {
 		}
 	
 		friend InputOfAscll & operator >> (InputOfAscll & cin, string & A) {
-			cin.fin >> A;
+            //cin.fin >> A;
 			return cin;
 		}
 
@@ -80,7 +84,7 @@ namespace sjtu {
 		}
 	
 		friend OutputOfAscll & operator << (OutputOfAscll & cout, string A) {
-			cout.fout << A;
+//			cout.fout << A;
 			return cout;
 		}
 

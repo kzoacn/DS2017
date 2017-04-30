@@ -1,9 +1,7 @@
-#include <locale>
+ï»¿/*#include <locale>
 #include <vector>
 #include <algorithm>
 #include <iterator>
-#include <iostream>
-#include<bits/stdc++.h>
 using namespace std;
 
 struct csv_reader: std::ctype<char> {
@@ -24,11 +22,11 @@ int main() {
     string s;
 	set<string>S;
 	while(cin>>s){
-		if(s.find("×ù")!=-1){
+		if(s.find("ï¿½ï¿½")!=-1){
 			S.insert(s);
 		}
 	}
 	for(auto x:S)
 		cout<<x<<endl;
     return 0;
-}
+}*/
