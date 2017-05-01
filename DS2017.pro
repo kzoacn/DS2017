@@ -43,7 +43,8 @@ HEADERS  += mainwindow.h \
     logindialog.h \
     src/RailwayMinistry.hpp \
     src/Ticket.hpp \
-    adminwindow.h
+    adminwindow.h \
+    src/CSVParser.hpp
 
 FORMS    += mainwindow.ui \
     logindialog.ui \

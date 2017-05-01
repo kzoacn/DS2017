@@ -19,6 +19,9 @@ public:
     ~AdminWindow();
     Admin admin;
     void load(string id,shared_ptr<RailwayMinistry>_rm);
+private slots:
+    void on_openCSV_clicked();
+
 private:
     Ui::AdminWindow *ui;
 };

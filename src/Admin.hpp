@@ -2,7 +2,8 @@
 
 
 #include "User.hpp"
-
+#include <iostream>
+using namespace std;
 class Admin : public User{
 public:
     Admin(){}
@@ -10,6 +11,11 @@ public:
         User(_id,_rm){}
     void addTrain(Train train){
         rw->addTrain(train);
+    }
+    void addTrainFromCSV(string input){
+        ifstream fin(input);
+        if(fin)
+            rw->addTrainFromCSV(fin);
     }
     void updateTrain(Train train){
         rw->updateTrain(train);

@@ -60,36 +60,11 @@ int main() {
 	set<string>S;
 
 
-	while(getline(cin,s)){
-		stringstream sin;
-		sin<<s;
-		sin.imbue(std::locale(std::locale(), new csv_reader()));
-	
-		string tmp;
-		sin>>tmp;
-		if(isalpha(tmp[0])){
-			push();
-			id=tmp;
-		}else if(tmp=="’æ√˚"){
-			sin>>tmp>>tmp>>tmp>>tmp;
-			while(sin>>tmp){
-				seat.push_back(tmp);
-			}
-		}else{
-			way.push_back(tmp);
-			sin>>tmp;date.push_back(tmp);
-			sin>>tmp;date.back()+="+"+tmp;
-			sin>>tmp;date.back()+="+"+tmp;
-			//sin>>tmp;date.back()+="+"+tmp;
-			sin>>tmp;dis.push_back(tmp);
-			price.push_back(vector<string>());
-			for(int i=0;i<seat.size();i++){
-				sin>>tmp;
-				price.back().push_back(tmp);
-			}
-		}
-	
+	while(cin>>s){
+		if(s.find("Œ‘")!=-1)
+			S.insert(s);
 	}
-	push();
+	for(auto x:S)
+		cout<<x<<endl;
     return 0;
 }

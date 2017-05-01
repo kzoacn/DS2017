@@ -7,6 +7,8 @@
 #include "lib/Date.hpp"
 #include "Train.hpp"
 #include "Station.hpp"
+#include "CSVParser.hpp"
+#include <iostream>
 using namespace sjtu;
 class RailwayMinistry{
 private:
@@ -44,6 +46,13 @@ public:
             }
         }
 	}
+    void addTrainFromCSV(ifstream &fin){
+        CSVParser csv;
+        vector<Train>trains=csv.process(fin);
+        for(auto &x:trains)
+            addTrain(x);
+    }
+
 	void updateTrain(Train train){
         removeTrain(train.getID());
         addTrain(train);
