@@ -70,12 +70,6 @@ public:
 	}
 
 
-    /*void queryTicket(string id){
-
-    }
-    string queryInfo(string id){
-
-    }*/
     Ticket buyTicket(string id,string trainid,Station a,Station b,TicketLevel level){
         Ticket ticket=trainMap[trainid].buyTicket(a,b,level);
         ticketMap[id].push_back(ticket);
@@ -95,6 +89,18 @@ public:
 	bool isAdmin(string id){
 		return adminMap.count(id);
 	}
+    bool isUser(string id,string pwd){
+        if(pwdMap.count(id)&&pwd==pwdMap[id])
+            return true;
+        return false;
+    }
+    bool regiser(string id,string pwd,string name){
+        if(pwdMap.count(id))
+            return false;
+        pwdMap[id]=pwd;
+        nameMap[id]=name;
+        return true;
+    }
 
     void readFromFile(string input="data.bin"){
        InputOfBinary fin(input);

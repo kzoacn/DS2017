@@ -6,6 +6,9 @@
 #include <QDialog>
 #include <QTextCodec>
 #include <QStandardItemModel>
+#include "src/User.hpp"
+#include "src/Admin.hpp"
+using namespace sjtu;
 int main(int argc, char *argv[])
 {
 //    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
@@ -17,8 +20,8 @@ int main(int argc, char *argv[])
     w.show();
     loginDialog lgin;
     lgin.show();
-    RailwayMinistry rm;
-    rm.writeToFile();
+    shared_ptr<RailwayMinistry> rm(new RailwayMinistry());
+    rm->writeToFile();
 
 
 
