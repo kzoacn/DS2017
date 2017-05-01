@@ -1,2 +1,3 @@
-﻿#include<algorithm>
+﻿#pragma once
+#include<algorithm>
 using namespace std;

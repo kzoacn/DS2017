@@ -104,10 +104,25 @@ public:
 
     void readFromFile(string input="data.bin"){
        InputOfBinary fin(input);
-       fin>>pwdMap>>nameMap>>adminMap>>allTrain>>trainMap>>stTrain>>ticketMap;
+       if(fin){
+           fin>>pwdMap>>nameMap>>adminMap>>allTrain>>trainMap>>stTrain>>ticketMap;
+       }else{
+           writeToFile(input);
+       }
+
+       //for test
+       pwdMap["admin"]="admin";
+       nameMap["admin"]="admin";
+       adminMap["admin"]=1;
+       pwdMap["user"]="user";
+       nameMap["user"]="user";
+
     }
     void writeToFile(string output="data.bin"){
        OutputOfBinary fout(output);
        fout<<pwdMap<<nameMap<<adminMap<<allTrain<<trainMap<<stTrain<<ticketMap;
+    }
+    ~RailwayMinistry(){
+        writeToFile();
     }
 };

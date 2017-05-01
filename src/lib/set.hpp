@@ -1,2 +1,4 @@
-﻿#include<set>
+﻿#pragma once
+
+#include<set>
 using namespace std;

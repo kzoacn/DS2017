@@ -1,2 +1,3 @@
-﻿#include<map>
+﻿#pragma once
+#include<map>
 using namespace std;

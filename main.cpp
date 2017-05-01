@@ -16,12 +16,16 @@ int main(int argc, char *argv[])
 //    QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 //    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    shared_ptr<RailwayMinistry> rm(new RailwayMinistry());
+
+
+    rm->readFromFile();
+
+
     loginDialog lgin;
     lgin.show();
-    shared_ptr<RailwayMinistry> rm(new RailwayMinistry());
-    rm->writeToFile();
+    MainWindow w;
+    w.show();
 
 
 

@@ -107,7 +107,11 @@ namespace sjtu {
 			ifstream fin;
 		
 		public:
-	
+
+        operator bool(){
+            return bool(fin);
+        }
+
 		InputOfBinary(string s = logfile) {
             fin.open(s.c_str(), std::ios::binary);
 		}
