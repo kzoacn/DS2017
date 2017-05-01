@@ -9,7 +9,7 @@ protected:
     shared_ptr<RailwayMinistry>rw;
 public:
     User(){}
-    User(shared_ptr<RailwayMinistry> _rw):rw(_rw){}
+    User(string _id,shared_ptr<RailwayMinistry> _rw):id(_id),rw(_rw){}
 
     bool login(string _id,string pwd){
         if(rw->isUser(id,pwd)){

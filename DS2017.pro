@@ -26,7 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     logindialog.cpp \
-    testwindow.cpp
+    adminwindow.cpp
 
 HEADERS  += mainwindow.h \
     src/lib/algo.hpp \
@@ -41,13 +41,12 @@ HEADERS  += mainwindow.h \
     src/Train.hpp \
     src/User.hpp \
     logindialog.h \
-    testwindow.h \
     src/RailwayMinistry.hpp \
-    src/Ticket.hpp
+    src/Ticket.hpp \
+    adminwindow.h
 
 FORMS    += mainwindow.ui \
     logindialog.ui \
-    testwindow.ui
+    adminwindow.ui
 
-DISTFILES += \
-    src/zky_test.exe
+

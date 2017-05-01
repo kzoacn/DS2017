@@ -1,4 +1,5 @@
 ﻿#include "mainwindow.h"
+#include "adminwindow.h"
 #include "logindialog.h"
 #include "testwindow.h"
 #include "src/RailwayMinistry.hpp"
@@ -8,6 +9,7 @@
 #include <QStandardItemModel>
 #include "src/User.hpp"
 #include "src/Admin.hpp"
+#include <QDebug>
 using namespace sjtu;
 int main(int argc, char *argv[])
 {
@@ -23,12 +25,20 @@ int main(int argc, char *argv[])
 
 
     loginDialog lgin;
-    lgin.show();
-    MainWindow w;
-    w.show();
-
-
-
-
-    return a.exec();
+    MainWindow userWindow;
+    AdminWindow adminWindow;
+    lgin.loadRM(rm);
+    if(lgin.exec()==QDialog::Accepted){
+        qDebug()<<QString::fromStdString(lgin.getID())<<endl;
+        string id=lgin.getID();
+        if(rm->isAdmin(id)){
+            adminWindow.load(id,rm);
+            adminWindow.show();
+        }else{
+            userWindow.load(id,rm);
+            userWindow.show();
+        }
+        return a.exec();
+    }
+    return 0;
 }

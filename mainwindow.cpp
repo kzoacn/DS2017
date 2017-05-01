@@ -6,6 +6,7 @@
 #include "ui_mainwindow.h"
 #include <QStandardItemModel>
 #include <QString>
+#include "src/RailwayMinistry.hpp"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -19,10 +20,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::load(string _id, shared_ptr<RailwayMinistry> _rm){
+    user=User(_id,_rm);
+}
+
 void MainWindow::on_search_clicked()
 {
     QStandardItemModel  *model = new QStandardItemModel();
-    model->setColumnCount(18);
+    model->setColumnCount(17);
     model->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("车次"));
     model->setHeaderData(1,Qt::Horizontal,QString::fromLocal8Bit("起点"));
     model->setHeaderData(2,Qt::Horizontal,QString::fromLocal8Bit("终点"));
