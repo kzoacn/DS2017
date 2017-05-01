@@ -1,11 +1,17 @@
 ﻿#pragma once
 
-#include "../FileManager.hpp"
 
 #ifndef SJTU_DATE_HPP
 #define SJTU_DATE_HPP
 
+#include "../FileManager.hpp"
 namespace sjtu {
+
+
+    static int daySum[13] = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365 };
+    static int daySum2[13] = { 0,31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366 };
+    static int dayNum[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
 	class Date {
 		class date {
 			class year {
@@ -97,9 +103,9 @@ namespace sjtu {
 				}
 			};
 
-			static const int daySum2[13];
-			static const int dayNum[13];
-			static const int daySum[13];
+            /*static int daySum2[13];
+            static int dayNum[13];
+            static int daySum[13];*/
 
 
 			int repair(date a, date b) {
@@ -211,8 +217,5 @@ namespace sjtu {
 	};
 }
 
-const int sjtu::Date::date::daySum[13] = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365 };
-const int sjtu::Date::date::daySum2[13] = { 0,31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366 };
-const int sjtu::Date::date::dayNum[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 #endif

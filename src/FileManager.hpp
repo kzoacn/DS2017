@@ -1,5 +1,8 @@
 ﻿#pragma once
 
+#ifndef SJTU_FILEMANAGER_HPP
+#define SJTU_FILEMANAGER_HPP
+
 
 #include <fstream>
 #include <cstring>
@@ -97,9 +100,6 @@ namespace sjtu {
 	
 	};
 */
-	bool isBlank(char c) {
-		return c == ' ' || c == '\n' || c == '\r' || c == '\t' || c == '\0';
-	}
 
 	class InputOfBinary {
 
@@ -266,7 +266,7 @@ namespace sjtu {
 
 	};
 
-	void CopyFiles(string srcfile, string tarfile) {
+    /*void CopyFiles(string srcfile, string tarfile) {
 
 		ifstream cin(srcfile.c_str(), fstream::in|fstream::binary);
 		ofstream cout(tarfile.c_str(), fstream::out|fstream::binary);
@@ -282,6 +282,7 @@ namespace sjtu {
 		cin.clear();
 		cout.close();
 		cout.clear();
-	};
+    };*/
 	
 };
+#endif

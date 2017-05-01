@@ -87,7 +87,7 @@ public:
 		nameMap[id]=name;
 	}	
 	bool isAdmin(string id){
-		return adminMap.count(id);
+        return (bool)adminMap.count(id);
 	}
     bool isUser(string id,string pwd){
         if(pwdMap.count(id)&&pwd==pwdMap[id])

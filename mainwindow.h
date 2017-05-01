@@ -1,7 +1,11 @@
-﻿#ifndef MAINWINDOW_H
+﻿#pragma once
+
+#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "src/lib/shared_ptr.hpp"
+#include "src/RailwayMinistry.hpp"
 
 namespace Ui {
 class MainWindow;

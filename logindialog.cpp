@@ -1,4 +1,4 @@
-#include "logindialog.h"
+﻿#include "logindialog.h"
 #include "ui_logindialog.h"
 
 loginDialog::loginDialog(QWidget *parent) :
@@ -11,4 +11,11 @@ loginDialog::loginDialog(QWidget *parent) :
 loginDialog::~loginDialog()
 {
     delete ui;
+}
+
+void loginDialog::on_login_clicked()
+{
+    string id=ui->usr->text().toStdString();
+    string pwd=ui->pwd->text().toStdString();
+
 }
