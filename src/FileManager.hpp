@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cstring>
 #include <iostream>
+//#include "Station.hpp"
 #include "lib/vector.hpp"
 #include "lib/set.hpp"
 #include "lib/map.hpp"
@@ -108,7 +109,7 @@ namespace sjtu {
 		public:
 	
 		InputOfBinary(string s = logfile) {
-			fin.open(s.c_str(), std::ios::binary);
+            fin.open(s.c_str(), std::ios::binary);
 		}
 	
 		friend InputOfBinary & operator >> (InputOfBinary & cin, int & A) {
@@ -120,11 +121,15 @@ namespace sjtu {
 			cin.fin.read((char *) (& A), sizeof A);
 			return cin;
 		}
-	
-		friend InputOfBinary & operator >> (InputOfBinary & cin, char & A) {
-			cin.fin.read((char *) (& A), sizeof A);
-			return cin;
-		}
+
+        friend InputOfBinary & operator >> (InputOfBinary & cin, char & A) {
+            cin.fin.read((char *) (& A), sizeof A);
+            return cin;
+        }
+        friend InputOfBinary & operator >> (InputOfBinary & cin, bool & A) {
+            cin.fin.read((char *) (& A), sizeof A);
+            return cin;
+        }
 	
         friend InputOfBinary & operator >> (InputOfBinary & cin, string & A) {
             int len;
@@ -193,7 +198,7 @@ namespace sjtu {
 		public:
 	
 		OutputOfBinary(string s = outputfile) {
-			fout.open(s.c_str(), std::ios::binary); 
+            fout.open(s.c_str(), std::ios::binary);
 		}
 	
 		friend OutputOfBinary & operator << (OutputOfBinary & cout, const int & A) {
@@ -205,11 +210,15 @@ namespace sjtu {
 			cout.fout.write((char *) (& A), sizeof A);
 			return cout;
 		}
-	
-		friend OutputOfBinary & operator << (OutputOfBinary & cout, const char & A) {
-			cout.fout.write((char *) (& A), sizeof A);
-			return cout;
-		}
+
+        friend OutputOfBinary & operator << (OutputOfBinary & cout, const char & A) {
+            cout.fout.write((char *) (& A), sizeof A);
+            return cout;
+        }
+        friend OutputOfBinary & operator << (OutputOfBinary & cout, const bool & A) {
+            cout.fout.write((char *) (& A), sizeof A);
+            return cout;
+        }
 	
         friend OutputOfBinary & operator << (OutputOfBinary & cout, const string & A) {
             cout<<(int)A.length();
@@ -221,28 +230,28 @@ namespace sjtu {
         template<class T>
         friend OutputOfBinary & operator << (OutputOfBinary & cout, const vector<T> & A) {
             cout<<(int)A.size();
-            for(int i=0;i<A.length();i++)
-                cout<<A[i];
+            for(int i=0;i<A.size();i++)
+                cout<<(T)A.at(i);
             return cout;
         }
         template<class T>
         friend OutputOfBinary & operator << (OutputOfBinary & cout, const set<T> & A) {
-            cout<<(int)A.size();
+            cout<<(int)A.size();//TODO
             for(auto x:A)
-                cout<<x;
+                cout<<(T)x;
             return cout;
         }
         template<class T1,class T2>
         friend OutputOfBinary & operator << (OutputOfBinary & cout, const map<T1,T2> & A) {
-            cout<<(int)A.size();
+            cout<<(int)A.size();//TODO
             for(auto x:A)
-                cout<<x;
+                cout<<(T1)x.first<<(T2)x.second;
             return cout;
         }
 
         template<class T1,class T2>
         friend OutputOfBinary & operator << (OutputOfBinary & cout, const pair<T1,T2> & A) {
-            cout<<A.first<<A.second;
+            cout<<(T1)A.first<<(T2)A.second;
             return cout;
         }
 	

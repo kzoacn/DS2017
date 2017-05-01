@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "../FileManager.hpp"
+
 #ifndef SJTU_DATE_HPP
 #define SJTU_DATE_HPP
 
@@ -19,7 +21,7 @@ namespace sjtu {
 				}
 				int operator-(year ex) {
 					return val - ex.val;
-				}
+                }
 				/*	year operator++(int x) {
 				year temp = *this;
 				val += 1;
@@ -72,10 +74,10 @@ namespace sjtu {
 				}
 			};
 
-			class time {
-				int hour;
-				int minute;
+            class time {
 			public:
+                int hour;
+                int minute;
 				time() {}
 				time(int hour, int minute) :hour(hour), minute(minute) {}
 				time(const time& ex) {
@@ -99,10 +101,6 @@ namespace sjtu {
 			static const int dayNum[13];
 			static const int daySum[13];
 
-			year y;
-			month m;
-			day d;
-			time t;
 
 			int repair(date a, date b) {
 				int cnt = 0;
@@ -128,8 +126,13 @@ namespace sjtu {
 				return cnt;
 			}
 		public:
+            year y;
+            month m;
+            day d;
+            time t;
 			date() {}
-			date(year y, month m, day d, time t) :y(y), m(m), d(d), t(t) {}
+            date(year y, month m, day d, time t) :y(y), m(m), d(d), t(t) {}
+            date(int y, int m, int d, int h,int min) :y(y), m(m), d(d), t(h,min) {}
 			date(const date& ex) :y(ex.y), m(ex.m), d(ex.d), t(ex.t) {}
 			int operator-(const date& ex) {
 				return between(ex, *this) * 1440 + (t - ex.t);
@@ -173,11 +176,12 @@ namespace sjtu {
 			}
 		};
 
-		date dt;
 	public:
+        date dt;
 		Date() {}
 		Date(const date& dt) :dt(dt) {}
         Date(const Date& ex) :dt(ex.dt) {}
+        Date(int y, int m, int d, int h,int min):dt(y,m,d,h,min){}
         friend int operator-(Date a, Date b) {
             if (a.dt > b.dt) return a.dt - b.dt;
             else return -(b.dt - a.dt);
@@ -193,6 +197,16 @@ namespace sjtu {
         }
 		friend Date operator+(Date a, int b) {
 			return Date(a.dt + b);
+        }
+        friend InputOfBinary& operator >> (InputOfBinary &cin,Date &dt){
+            int y,m,d,h,min;
+            cin>>y>>m>>d>>h>>min;
+            dt=Date(y,m,d,h,min);
+            return cin;
+        }
+        friend OutputOfBinary& operator << (OutputOfBinary &cout,Date &dt){
+            cout<<int(dt.dt.y)<<int(dt.dt.m)<<int(dt.dt.d)<<int(dt.dt.t.hour)<<int(dt.dt.t.minute);
+            return cout;
         }
 	};
 }

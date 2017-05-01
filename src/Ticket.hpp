@@ -6,7 +6,7 @@
 //#include "Ticket.hpp"
 using namespace sjtu;
 enum TicketLevel{
-	SECOND_SEAT,//二等座
+    SECOND_SEAT=0,//二等座
 	FIRST_SEAT,//一等座
 	BUSINESS_SEAT,//商务座
 	SPECIAL_SEAT,//特等座
@@ -53,5 +53,15 @@ public:
 	}
 	const Date& getTargetDate()const{
 		return targetDate;
+    }
+    friend InputOfBinary& operator >> (InputOfBinary &cin,Ticket &ticket){
+        int l;
+        cin>>l>>ticket.train>>ticket.cost>>ticket.start>>ticket.target>>ticket.startDate>>ticket.targetDate;
+        ticket.level=(TicketLevel)l;
+        return cin;
+    }
+    friend OutputOfBinary& operator << (OutputOfBinary &cout,Ticket &ticket){
+        cout<<int(ticket.level)<<ticket.train<<ticket.cost<<ticket.start<<ticket.target<<ticket.startDate<<ticket.targetDate;
+        return cout;
     }
 };

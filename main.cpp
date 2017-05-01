@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     loginDialog lgin;
     lgin.show();
     RailwayMinistry rm;
-
+    rm.writeToFile();
 
 
 

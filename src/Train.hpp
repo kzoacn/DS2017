@@ -1,10 +1,10 @@
 ﻿#pragma once
 
 #include "Station.hpp"
-
 #include "Ticket.hpp"
 #include "lib/vector.hpp"
 #include "lib/Date.hpp"
+#include "FileManager.hpp"
 class Train{
 private:
 	string id;
@@ -91,5 +91,13 @@ public:
     }
 	string getID(){
 		return id;
-	}
+    }
+    friend InputOfBinary& operator >> (InputOfBinary &cin,Train &train){
+        cin>>train.id>>train.sale>>train.isSold>>train.way>>train.date>>train.price>>train.restTicket;
+        return cin;
+    }
+    friend OutputOfBinary& operator << (OutputOfBinary &cout,Train &train){
+        cout<<train.id<<train.sale<<train.isSold<<train.way<<train.date<<train.price<<train.restTicket;
+        return cout;
+    }
 };

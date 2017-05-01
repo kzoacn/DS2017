@@ -6,6 +6,7 @@
 #include "lib/algo.hpp"
 #include "lib/Date.hpp"
 #include "Train.hpp"
+#include "Station.hpp"
 using namespace sjtu;
 class RailwayMinistry{
 private:
@@ -95,15 +96,12 @@ public:
 		return adminMap.count(id);
 	}
 
-    void readFromFile(string input="railway_ministry"){
- /*       InputOfBinary fin(input);
-        fin>>pwdMap
-        >>nameMap
-        >>adminMap
-        >>allTrain
-        >>trainMap
-        >>stTrain
-        >>ticketMap;
-*/
+    void readFromFile(string input="data.bin"){
+       InputOfBinary fin(input);
+       fin>>pwdMap>>nameMap>>adminMap>>allTrain>>trainMap>>stTrain>>ticketMap;
+    }
+    void writeToFile(string output="data.bin"){
+       OutputOfBinary fout(output);
+       fout<<pwdMap<<nameMap<<adminMap<<allTrain<<trainMap<<stTrain<<ticketMap;
     }
 };
