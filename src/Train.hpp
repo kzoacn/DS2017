@@ -30,10 +30,10 @@ public:
 		double x,y;
 		for(int i=0;i<way.size();i++){
 			if(way[i]==a){
-				x=price[int(level)][i];
+                x=price[i][int(level)];
 			}
 			if(way[i]==b){
-				y=price[int(level)][i];
+                y=price[i][int(level)];
 			}
 		}
 		return y-x;
