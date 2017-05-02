@@ -49,8 +49,8 @@ public:
         }
 	}
     void addTrainFromCSV(ifstream &fin){
-        CSVParser csv;
-        vector<Train>trains=csv.process(fin);
+        shared_ptr<CSVParser> csv(new CSVParser());
+        vector<Train>trains=csv->process(fin);
         for(auto &x:trains)
             addTrain(x);
     }
@@ -84,6 +84,7 @@ public:
     Ticket buyTicket(string id,string trainid,Station a,Station b,TicketLevel level){
         Ticket ticket=trainMap[trainid].buyTicket(a,b,level);
         ticketMap[id].push_back(ticket);
+        return ticket;
 	}
 	bool refund(string id,Ticket ticket){
         vector<Ticket>&tickets=ticketMap[id];

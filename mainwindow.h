@@ -24,6 +24,12 @@ public:
 private slots:
     void on_search_clicked();
 
+
+    void on_train_query_clicked();
+
+
+    void on_buy_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

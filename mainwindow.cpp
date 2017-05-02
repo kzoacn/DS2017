@@ -8,6 +8,7 @@
 #include <QString>
 #include "src/RailwayMinistry.hpp"
 #include "src/Station.hpp"
+#include <QMessageBox>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -39,7 +40,7 @@ void MainWindow::on_search_clicked()
     model->setHeaderData(7,Qt::Horizontal,QString::fromLocal8Bit("特等座"));
     model->setHeaderData(8,Qt::Horizontal,QString::fromLocal8Bit("一等座"));
     model->setHeaderData(9,Qt::Horizontal,QString::fromLocal8Bit("二等座"));
-    model->setHeaderData(10,Qt::Horizontal,QString::fromLocal8Bit("高级软卧ui->start->text()"));
+    model->setHeaderData(10,Qt::Horizontal,QString::fromLocal8Bit("高级软卧"));
     model->setHeaderData(11,Qt::Horizontal,QString::fromLocal8Bit("软卧"));
     model->setHeaderData(12,Qt::Horizontal,QString::fromLocal8Bit("硬卧"));
     model->setHeaderData(13,Qt::Horizontal,QString::fromLocal8Bit("软座"));
@@ -61,4 +62,32 @@ void MainWindow::on_search_clicked()
     }
     ui->tableView->setModel(model);
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+}
+
+
+
+void MainWindow::on_train_query_clicked()
+{
+    QStandardItemModel  *model = new QStandardItemModel();
+    model->setColumnCount(19);
+    model->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("车次"));
+    Train train=user.getTrainByID(ui->train_number->text().toStdString());
+
+    ui->tableView->setModel(model);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+
+}
+
+void MainWindow::on_buy_clicked()
+{
+    int row=ui->tableView->currentIndex().row();
+    int col=ui->tableView->currentIndex().column();
+    string trainid = (ui->tableView->model()->index(row,0,QModelIndex()).data())
+                                .toString().toStdString();
+    Station a,b;
+    a=Station(ui->start->text().toStdString());
+    b=Station(ui->target->text().toStdString());
+    TicketLevel level=Ticket::toLevel(ui->tableView->model()->headerData(col,Qt::Horizontal).toString().toStdString());
+    user.buyTicket(trainid,a,b,level);
+    QMessageBox::information(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("购票成功"));
 }

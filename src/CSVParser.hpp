@@ -9,6 +9,7 @@
 #include "lib/shared_ptr.hpp"
 #include "Train.hpp"
 #include <QString>
+#include <QDebug>
 using namespace std;
 
 struct csv_reader: std::ctype<char> {
@@ -40,7 +41,7 @@ private:
     }
     double to_double(string s){
         int x=0;
-        for(int i=0;i<s.length();i++)if(isdigit(s[i]))
+        for(int i=0;i<s.length();i++)if(is_digit(s[i]))
             x=x*10+s[i]-'0';
         if(s.find('.')!=-1)
             x/=10;
@@ -48,6 +49,7 @@ private:
     }
     Train push(){
         if(id=="")return Train();
+
         vector<Station> _way;
         vector<Date>_date;
         vector<vector<double> >_price(way.size());
@@ -57,10 +59,13 @@ private:
             _way.push_back(Station(x));
 
         for(auto x:date){
-            if(!isdigit(x[1][0]))
+
+            if(!is_digit(x[1][0]))
                 x[1]=x[2];
-            if(!isdigit(x[2][0]))
+
+            if(!is_digit(x[2][0]))
                 x[2]=x[1];
+
             int y,m,d,h,min;
             y=to_int(x[0].substr(0,4));
             m=to_int(x[0].substr(5,2));
@@ -69,6 +74,7 @@ private:
             min=to_int(x[1].substr(3,2));
             _date.push_back(Date(y,m,d,h,min));
         }
+
         vector<int>mp;
         for(auto x:seat){
             mp.push_back(Ticket::toLevel(x));
@@ -79,6 +85,7 @@ private:
                 _restTicket[i][x]=2000;
             }
         }
+
         for(auto &x:price){
             _price.push_back(vector<double>());
             _price.back().resize(10);
@@ -98,21 +105,32 @@ private:
         return train;
     }
 
+    bool is_alpha(char c){
+        return 'a'<=c&&c<='z' || 'A'<=c&&c<='Z';
+    }
+    bool is_digit(char c){
+        return '0'<=c&&c<='9';
+    }
+
 public:
     vector<Train> process(ifstream &cin){
         vector<Train>ans;
         string s;
+        int second=0;
         while(getline(cin,s)){
             stringstream sin;
             sin<<s;
             sin.imbue(std::locale(std::locale(), new csv_reader()));
             string tmp;
             sin>>tmp;
-            //qDebug()<<tmp<<endl;
-            if(isalpha(tmp[0])){
+           // qDebug()<<QString::fromStdString(tmp)<<" "<<is_alpha(tmp[0])<<" "<<second<<endl;
+            if(is_alpha(tmp[0])){
                 if(id!="")ans.push_back(push());
                 id=tmp;
-            }else if(tmp=="站名"){
+                second=1;
+            }else if(second==1){
+                second=2;
+              //  qDebug()<<"here!"<<endl;
                 sin>>tmp>>tmp>>tmp>>tmp;
                 while(sin>>tmp){
                     seat.push_back(tmp);

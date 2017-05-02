@@ -2,6 +2,7 @@
 
 #include "Station.hpp"
 #include "lib/Date.hpp"
+#include <QString>
 //#include "Ticket.hpp"
 using namespace sjtu;
 enum TicketLevel{
@@ -29,7 +30,7 @@ public:
 	Ticket(const Station &s,const Station &t,const double &c,const Date &sd,const Date &td,const string &tn,const TicketLevel &l):
         start(s),target(t),cost(c),startDate(sd),targetDate(td),train(tn),level(l){}
     static TicketLevel toLevel(string s){
-        if(s=="二等座")return SECOND_SEAT;
+        if(QString::fromStdString(s)==QString::fromLocal8Bit("二等座"))return SECOND_SEAT;
         if(s=="一等座")return FIRST_SEAT;
         if(s=="商务座")return BUSINESS_SEAT;
         if(s=="特等座")return SPECIAL_SEAT;

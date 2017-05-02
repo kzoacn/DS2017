@@ -39,7 +39,14 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QPushButton" name="train_query">
+        <property name="text">
+         <string>车次查询</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="buy">
         <property name="text">
          <string>订票</string>
         </property>
@@ -70,6 +77,9 @@
         </property>
         <property name="selectionMode">
          <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectItems</enum>
         </property>
         <property name="showGrid">
          <bool>false</bool>
@@ -135,6 +145,16 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>车次</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="train_number"/>
+      </item>
      </layout>
     </item>
    </layout>
@@ -145,7 +165,7 @@
      <x>0</x>
      <y>0</y>
      <width>716</width>
-     <height>28</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
