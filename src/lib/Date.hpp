@@ -37,7 +37,7 @@ namespace sjtu {
 					val += 1;
 					return *this;
 				}
-				operator int() {
+                operator int() const{
 					return val;
 				}
 			};
@@ -53,7 +53,7 @@ namespace sjtu {
 				int operator-(month ex) {
 					return val - ex.val;
 				}
-				operator int() {
+                operator int() const{
 					return val;
 				}
 			};
@@ -75,7 +75,7 @@ namespace sjtu {
 				void operator-=(int sub) {
 					val -= sub;
 				}
-				operator int() {
+                operator int() const{
 					return val;
 				}
 			};
@@ -198,19 +198,37 @@ namespace sjtu {
         friend bool operator<=(Date a, Date b) {
             return a-b<=0;
         }
+        friend bool operator>=(Date a, Date b) {
+            return a-b>=0;
+        }
         friend bool operator==(Date a, Date b) {
             return a-b==0;
         }
 		friend Date operator+(Date a, int b) {
 			return Date(a.dt + b);
         }
+
+        string to_string(int x)const{
+            string ans;ans="00";
+            ans[0]=(x/10%10+'0');
+            ans[1]=(x%10+'0');
+            return ans;
+        }
+
+        string to_string()const{
+            string ans;
+            int y=int(dt.y),m=int(dt.m),d=int(dt.d),h=int(dt.t.hour),min=int(dt.t.minute);
+            ans=to_string(y)+" "+to_string(m)+" "+to_string(d)+" "+to_string(h)+" "+to_string(min);
+            return ans;
+        }
+
         friend InputOfBinary& operator >> (InputOfBinary &cin,Date &dt){
             int y,m,d,h,min;
             cin>>y>>m>>d>>h>>min;
             dt=Date(y,m,d,h,min);
             return cin;
         }
-        friend OutputOfBinary& operator << (OutputOfBinary &cout,Date &dt){
+        friend OutputOfBinary& operator << (OutputOfBinary &cout,const Date &dt){
             cout<<int(dt.dt.y)<<int(dt.dt.m)<<int(dt.dt.d)<<int(dt.dt.t.hour)<<int(dt.dt.t.minute);
             return cout;
         }

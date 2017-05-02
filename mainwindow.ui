@@ -94,7 +94,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit">
+       <widget class="QLineEdit" name="start">
         <property name="text">
          <string>上海</string>
         </property>
@@ -108,7 +108,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_2">
+       <widget class="QLineEdit" name="target">
         <property name="text">
          <string>北京</string>
         </property>
@@ -122,7 +122,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_3">
+       <widget class="QLineEdit" name="date">
         <property name="text">
          <string>1926-08-17</string>
         </property>
@@ -145,7 +145,7 @@
      <x>0</x>
      <y>0</y>
      <width>716</width>
-     <height>23</height>
+     <height>28</height>
     </rect>
    </property>
   </widget>

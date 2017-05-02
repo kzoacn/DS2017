@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "Station.hpp"
-
 #include "lib/Date.hpp"
 //#include "Ticket.hpp"
 using namespace sjtu;
@@ -76,7 +75,7 @@ public:
         ticket.level=(TicketLevel)l;
         return cin;
     }
-    friend OutputOfBinary& operator << (OutputOfBinary &cout,Ticket &ticket){
+    friend OutputOfBinary& operator << (OutputOfBinary &cout,const Ticket &ticket){
         cout<<int(ticket.level)<<ticket.train<<ticket.cost<<ticket.start<<ticket.target<<ticket.startDate<<ticket.targetDate;
         return cout;
     }

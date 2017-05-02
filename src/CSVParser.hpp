@@ -8,6 +8,7 @@
 #include "lib/Date.hpp"
 #include "lib/shared_ptr.hpp"
 #include "Train.hpp"
+#include <QString>
 using namespace std;
 
 struct csv_reader: std::ctype<char> {
@@ -83,6 +84,8 @@ private:
             _price.back().resize(10);
             for(int i=0;i<x.size();i++){
                 _price.back()[mp[i]]=to_double(x[i]);
+                //if(_price.back()[mp[i]]==0)
+                //    _price.back()[mp[i]]=_price.front()[mp[i]];
             }
         }
 
@@ -105,6 +108,7 @@ public:
             sin.imbue(std::locale(std::locale(), new csv_reader()));
             string tmp;
             sin>>tmp;
+            //qDebug()<<tmp<<endl;
             if(isalpha(tmp[0])){
                 if(id!="")ans.push_back(push());
                 id=tmp;

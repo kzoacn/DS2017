@@ -96,7 +96,7 @@ public:
         cin>>train.id>>train.sale>>train.isSold>>train.way>>train.date>>train.price>>train.restTicket;
         return cin;
     }
-    friend OutputOfBinary& operator << (OutputOfBinary &cout,Train &train){
+    friend OutputOfBinary& operator << (OutputOfBinary &cout,const Train &train){
         cout<<train.id<<train.sale<<train.isSold<<train.way<<train.date<<train.price<<train.restTicket;
         return cout;
     }
