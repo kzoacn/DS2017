@@ -1,9 +1,11 @@
 ﻿#pragma once
 
+#ifndef STATION_HPP
+#define STATION_HPP
+
 #include "FileManager.hpp"
 
 using namespace sjtu;
-
 class Station{
 private:
     string id;
@@ -19,14 +21,14 @@ public:
     bool operator<(const Station &oth)const{
         return getName()<oth.getName();
     }
+    friend OutputOfBinary & operator << (OutputOfBinary & cout, const Station &station) {
+        cout<<station.id;
+        return cout;
+    }
     friend InputOfBinary & operator >> (InputOfBinary & cin, Station &station) {
         cin>>station.id;
         return cin;
     }
-    friend OutputOfBinary & operator << (OutputOfBinary & cout, Station &station) {
-        cout<<station.id;
-        return cout;
-    }
 };
-
+#endif
 

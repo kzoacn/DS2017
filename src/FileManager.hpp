@@ -190,9 +190,9 @@ namespace sjtu {
 
 		~InputOfBinary() {
 			fin.close();
-		}
+        }
 	
-	};
+    };
 
 	class OutputOfBinary {
 
@@ -262,7 +262,7 @@ namespace sjtu {
 		~OutputOfBinary() {
 			fout.flush();
 			fout.close();
-		}
+        }
 
 	};
 

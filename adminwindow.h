@@ -22,6 +22,8 @@ public:
 private slots:
     void on_openCSV_clicked();
 
+    void on_load_clicked();
+
 private:
     Ui::AdminWindow *ui;
 };

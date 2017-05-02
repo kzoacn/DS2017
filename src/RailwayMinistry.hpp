@@ -27,7 +27,7 @@ public:
             vector<Train>ans;
             for(auto id:tmp){
                 Train train=getTrainByID(id);
-                if(train.getStartTime()<=date)
+                if(train.getStartTime()>=date)
                     ans.push_back(train);
             }
             return ans;
@@ -38,6 +38,8 @@ public:
         return trainMap[id];
 	}
 	void addTrain(Train train){
+        if(trainMap.count(train.getID()))
+            return ;
         vector<Station>way=train.getWay();
         trainMap[train.getID()]=train;
         for(int i=0;i<way.size();i++){
