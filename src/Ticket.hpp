@@ -42,6 +42,19 @@ public:
         if(s=="硬卧下")return HARD_BED;
         return NO_SEAT;
     }
+    static TicketLevel toLevel(int x){
+        if(x==0)return SECOND_SEAT;
+        if(x==1)return FIRST_SEAT;
+        if(x==2)return BUSINESS_SEAT;
+        if(x==3)return SPECIAL_SEAT;
+        if(x==4)return NO_SEAT;
+        if(x==5)return SOFT_SEAT;
+        if(x==6)return HARD_SEAT;
+        if(x==7)return AD_SOFT_BED;
+        if(x==8)return SOFT_BED;
+        if(x==9)return HARD_BED;
+        return NO_SEAT;
+    }
     bool operator==(const Ticket &oth)const{
         return level==oth.level&&train==oth.train
                 &&cost==oth.cost&&start==oth.start

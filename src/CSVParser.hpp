@@ -52,7 +52,7 @@ private:
 
         vector<Station> _way;
         vector<Date>_date;
-        vector<vector<double> >_price(way.size());
+        vector<vector<double> >_price;
         vector<vector<int> >_restTicket(way.size());
 
         for(auto x:way)
@@ -86,11 +86,11 @@ private:
             }
         }
 
-        for(auto &x:price){
+        for(int i=0;i<price.size();i++){
             _price.push_back(vector<double>());
             _price.back().resize(10);
-            for(int i=0;i<x.size();i++){
-                _price.back()[mp[i]]=to_double(x[i]);
+            for(int j=0;j<mp.size();j++){
+                _price.back()[mp[j]]=to_double(price[i][j]);
                 //if(_price.back()[mp[i]]==0)
                 //    _price.back()[mp[i]]=_price.front()[mp[i]];
             }
