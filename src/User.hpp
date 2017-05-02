@@ -2,6 +2,7 @@
 
 #include "RailwayMinistry.hpp"
 #include "lib/shared_ptr.hpp"
+#include "lib/vector.hpp"
 using namespace sjtu;
 class User{
 protected:

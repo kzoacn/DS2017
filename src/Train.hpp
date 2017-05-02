@@ -5,6 +5,7 @@
 #include "lib/vector.hpp"
 #include "lib/Date.hpp"
 #include "FileManager.hpp"
+using namespace sjtu;
 class Train{
 private:
 	string id;

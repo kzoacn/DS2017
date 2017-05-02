@@ -3,7 +3,7 @@
 
 #include "User.hpp"
 #include <iostream>
-using namespace std;
+using namespace sjtu;
 class Admin : public User{
 public:
     Admin(){}

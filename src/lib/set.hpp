@@ -1,3 +1,7 @@
+﻿#include <set>
+//using namespace std;
+/*
+
 #ifndef SJTU_MAP_HPP
 #define SJTU_MAP_HPP
 
@@ -356,7 +360,7 @@ namespace sjtu {
 				return p != rhs.p || r != rhs.r;
 			}
 
-			T* operator->() const noexcept {
+            T* operator->() const {
 				return r->v;
 			}
 
@@ -447,7 +451,7 @@ namespace sjtu {
 				return p != rhs.p || r != rhs.r;
 			}
 
-			T* operator->() const noexcept {
+            T* operator->() const {
 				return r->v;
 			}
 
@@ -540,3 +544,4 @@ namespace sjtu {
 }
 
 #endif
+*/

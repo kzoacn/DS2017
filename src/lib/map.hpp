@@ -1,4 +1,6 @@
-#ifndef SJTU_MAP_HPP
+﻿#include <map>
+//using namespace std;
+/*#ifndef SJTU_MAP_HPP
 #define SJTU_MAP_HPP
 
 #include <functional>
@@ -596,3 +598,4 @@ namespace sjtu {
 }
 
 #endif
+*/

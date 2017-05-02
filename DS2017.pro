@@ -27,7 +27,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     logindialog.cpp \
     adminwindow.cpp \
-    minewindow.cpp
+    minewindow.cpp \
+    src/csv_tester.cpp \
+    src/Judge.cpp \
+    src/main.cpp \
+    src/Test.cpp \
+    TrainBoom/f2.cpp \
+    TrainBoom/filter.cpp \
+    testwindow.cpp
 
 HEADERS  += mainwindow.h \
     src/lib/algo.hpp \
@@ -46,7 +53,11 @@ HEADERS  += mainwindow.h \
     src/Ticket.hpp \
     adminwindow.h \
     src/CSVParser.hpp \
-    minewindow.h
+    minewindow.h \
+    src/lib/exceptions.hpp \
+    src/lib/utility.hpp \
+    src/LoginManager.hpp \
+    testwindow.h
 
 FORMS    += mainwindow.ui \
     logindialog.ui \

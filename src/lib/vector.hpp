@@ -1,3 +1,6 @@
+﻿#include <vector>
+using namespace std;
+/*
 #ifndef SJTU_VECTOR_HPP
 #define SJTU_VECTOR_HPP
 
@@ -8,7 +11,7 @@
 
 namespace sjtu {
 
-	template<typename T>
+    template<class T>
 	class vector {
 
 	private:
@@ -235,12 +238,12 @@ namespace sjtu {
 			return a[pos];
 		}
 
-		const T & front() const {
+        T & front() const {
 			if (!siz) throw(container_is_empty());
 			return a[0];
 		}
 
-		const T & back() const {
+        T & back() const {
 			if (!siz) throw(container_is_empty());
 			return a[siz - 1];
 		}
@@ -329,6 +332,10 @@ namespace sjtu {
 			:: new (a + siz) T(value);
 			++siz;
 		}
+        void resize(int n){
+            while(n--)
+                push_back(T());
+        }
 
 		void pop_back() {
 			siz--;
@@ -338,3 +345,5 @@ namespace sjtu {
 }
 
 #endif
+
+*/
