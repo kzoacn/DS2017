@@ -93,3 +93,9 @@ void MainWindow::on_buy_clicked()
     user.buyTicket(trainid,a,b,level);
     QMessageBox::information(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("购票成功"));
 }
+
+
+void MainWindow::on_mine_clicked()
+{
+
+}

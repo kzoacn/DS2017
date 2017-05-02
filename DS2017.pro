@@ -26,7 +26,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     logindialog.cpp \
-    adminwindow.cpp
+    adminwindow.cpp \
+    minewindow.cpp
 
 HEADERS  += mainwindow.h \
     src/lib/algo.hpp \
@@ -44,10 +45,12 @@ HEADERS  += mainwindow.h \
     src/RailwayMinistry.hpp \
     src/Ticket.hpp \
     adminwindow.h \
-    src/CSVParser.hpp
+    src/CSVParser.hpp \
+    minewindow.h
 
 FORMS    += mainwindow.ui \
     logindialog.ui \
-    adminwindow.ui
+    adminwindow.ui \
+    minewindow.ui
 
 

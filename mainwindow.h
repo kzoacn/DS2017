@@ -30,6 +30,9 @@ private slots:
 
     void on_buy_clicked();
 
+
+    void on_mine_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
