@@ -8,6 +8,7 @@
 #include "src/Station.hpp"
 #include <QMessageBox>
 using namespace sjtu;
+using std::to_string;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)

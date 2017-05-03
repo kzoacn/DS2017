@@ -1,9 +1,4 @@
-﻿#include <set>
-using namespace std;
-/*
-
-
-#define once
+﻿#define once
 
 #ifndef SJTU_MAP_HPP
 #define SJTU_MAP_HPP
@@ -548,4 +543,3 @@ namespace sjtu {
 
 #endif
 
-*/
