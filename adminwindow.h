@@ -6,6 +6,7 @@
 #include "src/Admin.hpp"
 #include <QMainWindow>
 
+using namespace sjtu;
 namespace Ui {
 class AdminWindow;
 }

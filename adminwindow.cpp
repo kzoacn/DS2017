@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QMessageBox>
+using namespace sjtu;
 AdminWindow::AdminWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::AdminWindow)

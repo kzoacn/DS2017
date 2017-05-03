@@ -7,6 +7,7 @@
 #include "src/RailwayMinistry.hpp"
 #include "src/Station.hpp"
 #include <QMessageBox>
+using namespace sjtu;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)

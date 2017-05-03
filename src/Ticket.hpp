@@ -4,7 +4,9 @@
 #include "lib/Date.hpp"
 #include <QString>
 //#include "Ticket.hpp"
-using namespace sjtu;
+namespace sjtu{
+
+
 enum TicketLevel{
     SECOND_SEAT=0,//二等座
 	FIRST_SEAT,//一等座
@@ -94,3 +96,6 @@ public:
         return cout;
     }
 };
+
+
+}

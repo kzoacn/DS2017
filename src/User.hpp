@@ -1,9 +1,14 @@
 ﻿#pragma once
 
+#ifndef USER_HPP
+#define USER_HPP
+
 #include "RailwayMinistry.hpp"
 #include "lib/shared_ptr.hpp"
 #include "lib/vector.hpp"
-using namespace sjtu;
+
+namespace sjtu{
+
 class User{
 protected:
     string id;
@@ -36,3 +41,6 @@ public:
         rw->updateInfo(id,pwd,name);
     }
 };
+
+}
+#endif

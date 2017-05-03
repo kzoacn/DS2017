@@ -1,6 +1,7 @@
 ﻿#include "logindialog.h"
 #include "ui_logindialog.h"
 #include <QMessageBox>
+using namespace sjtu;
 loginDialog::loginDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::loginDialog)

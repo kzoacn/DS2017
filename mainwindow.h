@@ -8,6 +8,7 @@
 #include "src/RailwayMinistry.hpp"
 #include "src/User.hpp"
 
+using namespace sjtu;
 namespace Ui {
 class MainWindow;
 }

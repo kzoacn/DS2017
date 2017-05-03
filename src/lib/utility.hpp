@@ -20,6 +20,9 @@ public:
 	pair(const pair<U1, U2> &other) : first(other.first), second(other.second) {}
 	template<class U1, class U2>
 	pair(pair<U1, U2> &&other) : first(other.first), second(other.second) {}
+    bool operator<(const pair &oth)const{
+        return first!=oth.first?first<oth.first:second<oth.second;
+    }
 };
 
 }

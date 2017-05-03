@@ -10,7 +10,8 @@
 #include "Train.hpp"
 #include <QString>
 #include <QDebug>
-using namespace sjtu;
+
+namespace sjtu{
 
 struct csv_reader: std::ctype<char> {
     csv_reader(): std::ctype<char>(get_table()) {}
@@ -155,3 +156,5 @@ public:
     }
 
 };
+
+}

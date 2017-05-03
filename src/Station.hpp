@@ -5,7 +5,8 @@
 
 #include "FileManager.hpp"
 
-using namespace sjtu;
+namespace sjtu{
+
 class Station{
 private:
     string id;
@@ -30,5 +31,7 @@ public:
         return cin;
     }
 };
+
+}
 #endif
 

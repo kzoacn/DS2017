@@ -1,11 +1,16 @@
 ﻿#pragma once
 
+#ifndef TRAIN_HPP
+#define TRAIN_HPP
+
 #include "Station.hpp"
 #include "Ticket.hpp"
 #include "lib/vector.hpp"
 #include "lib/Date.hpp"
 #include "FileManager.hpp"
-using namespace sjtu;
+
+namespace sjtu{
+
 class Train{
 private:
 	string id;
@@ -102,3 +107,6 @@ public:
         return cout;
     }
 };
+
+}
+#endif

@@ -5,11 +5,13 @@
 #include "lib/vector.hpp"
 #include "lib/algo.hpp"
 #include "lib/Date.hpp"
+#include "lib/shared_ptr.hpp"
 #include "Train.hpp"
 #include "Station.hpp"
 #include "CSVParser.hpp"
 #include <iostream>
-using namespace sjtu;
+namespace sjtu{
+
 class RailwayMinistry{
 private:
 
@@ -140,3 +142,5 @@ public:
         writeToFile();
     }
 };
+
+}

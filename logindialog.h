@@ -7,6 +7,8 @@
 #include "src/RailwayMinistry.hpp"
 #include <QDialog>
 
+using namespace sjtu;
+
 namespace Ui {
 class loginDialog;
 }

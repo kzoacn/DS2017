@@ -1,9 +1,13 @@
 ﻿#pragma once
 
+#ifndef ADMIN_HPP
+#define ADMIN_HPP
 
 #include "User.hpp"
 #include <iostream>
-using namespace sjtu;
+
+namespace sjtu{
+
 class Admin : public User{
 public:
     Admin(){}
@@ -31,3 +35,5 @@ public:
     }
 
 };
+}
+#endif

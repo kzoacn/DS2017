@@ -1,6 +1,10 @@
 ﻿#include <vector>
 using namespace std;
+
+
+
 /*
+#pragma once
 #ifndef SJTU_VECTOR_HPP
 #define SJTU_VECTOR_HPP
 
