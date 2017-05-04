@@ -54,8 +54,8 @@ private:
         vector<Station> _way;
         vector<Date>_date;
         vector<vector<double> >_price;
-        vector<vector<int> >_restTicket(way.size());
-
+        vector<vector<int> >_restTicket;
+        _restTicket.resize(way.size());
         for(auto x:way)
             _way.push_back(Station(x));
 
@@ -119,7 +119,7 @@ public:
         string s;
         int second=0;
         while(getline(cin,s)){
-            stringstream sin;
+            std::stringstream sin;
             sin<<s;
             sin.imbue(std::locale(std::locale(), new csv_reader()));
             string tmp;

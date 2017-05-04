@@ -13,7 +13,7 @@
 #include "lib/map.hpp"
 #include "lib/algo.hpp"
 
-//#define string std::string
+#define string std::string
 #define ifstream std::ifstream
 #define ofstream std::ofstream
 #define fstream std::fstream
@@ -241,15 +241,15 @@ namespace sjtu {
         template<class T>
         friend OutputOfBinary & operator << (OutputOfBinary & cout, const set<T> & A) {
             cout<<(int)A.size();//TODO
-            for(auto x:A)
-                cout<<(T)x;
+            for(typename set<T>::const_iterator it=A.cbegin();it!=A.cend();it++)
+                cout<<(T)*it;
             return cout;
         }
         template<class T1,class T2>
         friend OutputOfBinary & operator << (OutputOfBinary & cout, const map<T1,T2> & A) {
             cout<<(int)A.size();//TODO
-            for(auto x:A)
-                cout<<(T1)x.first<<(T2)x.second;
+            for(typename map<T1,T2>::const_iterator it=A.cbegin();it!=A.cend();it++)
+                cout<<(T1)it->first<<(T2)it->second;
             return cout;
         }
 
@@ -285,4 +285,6 @@ namespace sjtu {
     };*/
 	
 };
+#undef string
+
 #endif
