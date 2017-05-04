@@ -33,39 +33,53 @@
     </layout>
    </item>
    <item row="0" column="1">
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QLineEdit" name="usr"/>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="2" column="1">
+      <widget class="QCheckBox" name="checkBox">
+       <property name="text">
+        <string>显示密码</string>
+       </property>
+      </widget>
      </item>
-     <item>
+     <item row="2" column="0">
       <widget class="QLineEdit" name="pwd">
        <property name="echoMode">
         <enum>QLineEdit::Password</enum>
        </property>
       </widget>
      </item>
+     <item row="0" column="0">
+      <widget class="QLineEdit" name="usr"/>
+     </item>
+     <item row="0" column="1">
+      <widget class="QCheckBox" name="checkBox_2">
+       <property name="text">
+        <string>以管理员模式登录</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
-   <item row="1" column="0" colspan="2">
+   <item row="3" column="0" colspan="2">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="1">
+     <item row="1" column="2">
+      <widget class="QPushButton" name="exit">
+       <property name="text">
+        <string>退出</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
       <widget class="QPushButton" name="reg">
        <property name="text">
         <string>注册</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
+     <item row="1" column="0">
       <widget class="QPushButton" name="login">
        <property name="text">
         <string>登录</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="exit">
-       <property name="text">
-        <string>退出</string>
        </property>
       </widget>
      </item>
