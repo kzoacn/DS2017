@@ -30,22 +30,22 @@ void MainWindow::on_search_clicked()
 {
     QStandardItemModel  *model = new QStandardItemModel();
     model->setColumnCount(16);
-    model->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("车次"));
-    model->setHeaderData(1,Qt::Horizontal,QString::fromLocal8Bit("起点"));
-    model->setHeaderData(2,Qt::Horizontal,QString::fromLocal8Bit("终点"));
-    model->setHeaderData(3,Qt::Horizontal,QString::fromLocal8Bit("出发时间"));
-    model->setHeaderData(4,Qt::Horizontal,QString::fromLocal8Bit("到达时间"));
-    model->setHeaderData(5,Qt::Horizontal,QString::fromLocal8Bit("经过时间"));
-    model->setHeaderData(6,Qt::Horizontal,QString::fromLocal8Bit("二等座"));
-    model->setHeaderData(7,Qt::Horizontal,QString::fromLocal8Bit("一等座"));
-    model->setHeaderData(8,Qt::Horizontal,QString::fromLocal8Bit("商务座"));
-    model->setHeaderData(9,Qt::Horizontal,QString::fromLocal8Bit("特等座"));
-    model->setHeaderData(10,Qt::Horizontal,QString::fromLocal8Bit("无座"));
-    model->setHeaderData(11,Qt::Horizontal,QString::fromLocal8Bit("软座"));
-    model->setHeaderData(12,Qt::Horizontal,QString::fromLocal8Bit("硬座"));
-    model->setHeaderData(13,Qt::Horizontal,QString::fromLocal8Bit("高级软卧"));
-    model->setHeaderData(14,Qt::Horizontal,QString::fromLocal8Bit("软卧下"));
-    model->setHeaderData(15,Qt::Horizontal,QString::fromLocal8Bit("硬卧下"));
+    model->setHeaderData(0,Qt::Horizontal,tr("车次"));
+    model->setHeaderData(1,Qt::Horizontal,tr("起点"));
+    model->setHeaderData(2,Qt::Horizontal,tr("终点"));
+    model->setHeaderData(3,Qt::Horizontal,tr("出发时间"));
+    model->setHeaderData(4,Qt::Horizontal,tr("到达时间"));
+    model->setHeaderData(5,Qt::Horizontal,tr("经过时间"));
+    model->setHeaderData(6,Qt::Horizontal,tr("二等座"));
+    model->setHeaderData(7,Qt::Horizontal,tr("一等座"));
+    model->setHeaderData(8,Qt::Horizontal,tr("商务座"));
+    model->setHeaderData(9,Qt::Horizontal,tr("特等座"));
+    model->setHeaderData(10,Qt::Horizontal,tr("无座"));
+    model->setHeaderData(11,Qt::Horizontal,tr("软座"));
+    model->setHeaderData(12,Qt::Horizontal,tr("硬座"));
+    model->setHeaderData(13,Qt::Horizontal,tr("高级软卧"));
+    model->setHeaderData(14,Qt::Horizontal,tr("软卧下"));
+    model->setHeaderData(15,Qt::Horizontal,tr("硬卧下"));
     Station a,b;
     a=Station(ui->start->text().toStdString());
     b=Station(ui->target->text().toStdString());
@@ -74,7 +74,7 @@ void MainWindow::on_train_query_clicked()
 {
     QStandardItemModel  *model = new QStandardItemModel();
     model->setColumnCount(19);
-    model->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("车次"));
+    model->setHeaderData(0,Qt::Horizontal,tr("车次"));
     Train train=user.getTrainByID(ui->train_number->text().toStdString());
 
     ui->tableView->setModel(model);
@@ -93,7 +93,7 @@ void MainWindow::on_buy_clicked()
     b=Station(ui->target->text().toStdString());
     TicketLevel level=Ticket::toLevel(ui->tableView->model()->headerData(col,Qt::Horizontal).toString().toStdString());
     user.buyTicket(trainid,a,b,level);
-    QMessageBox::information(NULL, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("购票成功"));
+    QMessageBox::information(NULL, tr("提示"), tr("购票成功"));
 }
 
 

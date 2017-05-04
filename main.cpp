@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     if(lgin.exec()==QDialog::Accepted){
         qDebug()<<QString::fromStdString(lgin.getID())<<endl;
         string id=lgin.getID();
-        if(rm->isAdmin(id)){
+        if(lgin.isAdmin()){
             adminWindow.load(id,rm);
             adminWindow.show();
         }else{
