@@ -5,7 +5,7 @@
 #define SJTU_DATE_HPP
 
 #include "../FileManager.hpp"
-
+#include <QDate>
 
 namespace sjtu {
 
@@ -193,6 +193,11 @@ namespace sjtu {
         Date(int y, int m, int d, int h,int min):dt(y,m,d,h,min){}
         Date to_day(){
             return Date(dt.y,dt.m,dt.d,0,0);
+        }
+        Date(const QDate &date){
+            int y,m,d;
+            date.getDate(&y,&m,&d);
+            *this=Date(y,m,d,0,0);
         }
         friend int operator-(Date a, Date b) {
             if (a.dt > b.dt) return a.dt - b.dt;

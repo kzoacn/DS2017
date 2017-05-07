@@ -132,16 +132,16 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="date">
-        <property name="text">
-         <string>1926-08-17</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_6">
-        <property name="text">
-         <string>选择日期</string>
+       <widget class="QDateEdit" name="dateEdit">
+        <property name="dateTime">
+         <datetime>
+          <hour>0</hour>
+          <minute>0</minute>
+          <second>0</second>
+          <year>2017</year>
+          <month>4</month>
+          <day>1</day>
+         </datetime>
         </property>
        </widget>
       </item>
@@ -165,7 +165,7 @@
      <x>0</x>
      <y>0</y>
      <width>716</width>
-     <height>23</height>
+     <height>28</height>
     </rect>
    </property>
   </widget>

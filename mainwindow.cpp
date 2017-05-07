@@ -50,8 +50,8 @@ void MainWindow::on_search_clicked()
     Station a,b;
     a=Station(ui->start->text().toStdString());
     b=Station(ui->target->text().toStdString());
-    Date date;
-    date=Date::fromDay(ui->date->text().toStdString());
+    Date date(ui->dateEdit->date());
+    //date=Date::fromDay(ui->date->text().toStdString());
     vector<Train>trains=user.getTrainByST(a,b,date);
     for(int i=0;i<trains.size();i++){
         model->setItem(i,0,new QStandardItem(QString::fromStdString(trains[i].getID())));
@@ -90,8 +90,8 @@ void MainWindow::on_train_query_clicked()
     model->setHeaderData(10,Qt::Horizontal,tr("软卧下"));
     model->setHeaderData(11,Qt::Horizontal,tr("硬卧下"));
     Train train=user.getTrainByID(ui->train_number->text().toStdString());
-    Date date;
-    date=Date::fromDay(ui->date->text().toStdString());
+    Date date(ui->dateEdit->date());
+    //date=Date::fromDay(ui->date->text().toStdString());
 
     for(int i=0;i<train.getWay().size();i++){
         Station a=train.getWay()[i];
@@ -119,8 +119,8 @@ void MainWindow::on_buy_clicked()
     Station a,b;
     a=Station(ui->start->text().toStdString());
     b=Station(ui->target->text().toStdString());
-    Date date;
-    date=Date::fromDay(ui->date->text().toStdString());
+    Date date(ui->dateEdit->date());
+    //date=Date::fromDay(ui->date->text().toStdString());
     TicketLevel level=Ticket::toLevel(ui->tableView->model()->headerData(col,Qt::Horizontal).toString().toStdString());
     bool succ=user.buyTicket(trainid,a,b,level,1,date).second;
     if(succ)
