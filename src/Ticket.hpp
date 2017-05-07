@@ -3,6 +3,7 @@
 #include "Station.hpp"
 #include "lib/Date.hpp"
 #include <QString>
+#include <QDebug>
 //#include "Ticket.hpp"
 namespace sjtu{
 
@@ -75,6 +76,11 @@ public:
         return "处女座";
     }
     bool operator==(const Ticket &oth)const{
+
+        qDebug()<<(start==oth.start)<<'\n';
+        qDebug()<<(target==oth.target)<<'\n';
+        qDebug()<<(trainDate==oth.trainDate)<<'\n';
+
         return level==oth.level&&train==oth.train
                 &&start==oth.start
                 &&target==oth.target

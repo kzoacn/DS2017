@@ -37,12 +37,6 @@ void AdminWindow::on_load_clicked()
     QMessageBox::information(NULL, tr("Path"), tr("Success!"));
 }
 
-<<<<<<< HEAD
-void AdminWindow::on_queryInfo_clicked()
-{
-    MineWindow *mine=new MineWindow();
-    mine->load(ui->user->text().toStdString(),admin.rw);
-=======
 void AdminWindow::on_open_log_clicked()
 {
     QString path = QFileDialog::getOpenFileName(this, tr("Open Log"), ".", tr("Files(*.*)"));
@@ -64,6 +58,5 @@ void AdminWindow::on_query_user_clicked()
     MineWindow *mine=new MineWindow(this);
     string id=ui->userid->text().toStdString();
     mine->load(id,admin.rw);
->>>>>>> 116ebc74b3bda5adbe9cd4d45280c63a08fde1dd
     mine->show();
 }

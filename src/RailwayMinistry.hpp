@@ -107,13 +107,18 @@ public:
 	}
 
 
-    Ticket buyTicket(string id,string trainid,Station a,Station b,TicketLevel level,int num,Date date){
+    pair<Ticket,bool> buyTicket(string id,string trainid,Station a,Station b,TicketLevel level,int num,Date date){
+        if(!trainMap.count(trainid)||!trainMap[trainid].canSell(date))
+            return make_pair(Ticket(),false);
+        if(!trainMap[trainid].canBuy(a,b,level))
+            return make_pair(Ticket(),false);
         Ticket ticket=trainMap[trainid].buyTicket(a,b,level,num,date);
         ticketMap[id].push_back(ticket);
-        return ticket;
+        return make_pair(ticket,true);
 	}
 	bool refund(string id,Ticket ticket){
         vector<Ticket>&tickets=ticketMap[id];
+
         if(find(tickets.begin(),tickets.end(),ticket)!=tickets.end()){
             tickets.erase(find(tickets.begin(),tickets.end(),ticket));
             return true;

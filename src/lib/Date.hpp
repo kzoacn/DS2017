@@ -180,7 +180,7 @@ namespace sjtu {
 				if (y > ex.y) return true;
 				else if (m > ex.m) return true;
 				else if (d > ex.d) return true;
-				else if (t - ex.t >= 0) return true;
+                else if (t - ex.t > 0) return true;
 				else return false;
 			}
 		};
@@ -208,7 +208,7 @@ namespace sjtu {
             return a-b>=0;
         }
         friend bool operator==(Date a, Date b) {
-            return a-b==0;
+            return !(a.dt>b.dt)&&!(b.dt>a.dt);
         }
 		friend Date operator+(Date a, int b) {
 			return Date(a.dt + b);

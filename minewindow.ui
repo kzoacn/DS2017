@@ -104,8 +104,6 @@
        </widget>
       </item>
       <item>
-<<<<<<< HEAD
-=======
        <widget class="QPushButton" name="yes">
         <property name="text">
          <string>确认</string>
@@ -113,7 +111,6 @@
        </widget>
       </item>
       <item>
->>>>>>> 116ebc74b3bda5adbe9cd4d45280c63a08fde1dd
        <widget class="QPushButton" name="exit">
         <property name="text">
          <string>退出</string>
@@ -165,13 +162,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-<<<<<<< HEAD
-     <x>508</x>
-     <y>354</y>
-=======
      <x>511</x>
      <y>353</y>
->>>>>>> 116ebc74b3bda5adbe9cd4d45280c63a08fde1dd
     </hint>
     <hint type="destinationlabel">
      <x>279</x>

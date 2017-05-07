@@ -98,7 +98,10 @@ public:
 			if(start)
                 restTicket[ticket.getStartDate()][i][ticket.getLevel()]+=ticket.getNum();
 		}
-	}
+    }
+    bool canBuy(Station a,Station b,TicketLevel level){
+       return getCost(a,b,level)>1e-4;
+    }
     void startSale(Date date){
         onSale.insert(date);
 	}

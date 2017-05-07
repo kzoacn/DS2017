@@ -81,6 +81,6 @@ void MineWindow::on_pushButton_2_clicked()
 {
     int row=ui->tableView->currentIndex().row();
     vector<Ticket>tickets=user.queryTicket();
-    user.refund(tickets[row-1]);
+    user.refund(tickets[row]);
     QMessageBox::information(NULL, tr("提示"), tr("退票成功"));
 }

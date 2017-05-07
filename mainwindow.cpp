@@ -95,8 +95,11 @@ void MainWindow::on_buy_clicked()
     b=Station(ui->target->text().toStdString());
     Date date(2017,3,28,0,0);
     TicketLevel level=Ticket::toLevel(ui->tableView->model()->headerData(col,Qt::Horizontal).toString().toStdString());
-    user.buyTicket(trainid,a,b,level,1,date);
-    QMessageBox::information(NULL, tr("提示"), tr("购票成功"));
+    bool succ=user.buyTicket(trainid,a,b,level,1,date).second;
+    if(succ)
+        QMessageBox::information(NULL, tr("提示"), tr("购票成功"));
+    else
+        QMessageBox::information(NULL, tr("提示"), tr("购票失败..."));
 }
 
 
