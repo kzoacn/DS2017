@@ -10,6 +10,7 @@
 #include "Station.hpp"
 #include "CSVParser.hpp"
 #include <iostream>
+#include "Log.hpp"
 namespace sjtu{
 
 class RailwayMinistry{
@@ -22,6 +23,7 @@ private:
     map<string,Train>trainMap;
     map<pair<Station,Station>,set<string> >stTrain;
     map<string,vector<Ticket> >ticketMap;
+    vector<Log>Logs;
 public:
     vector<Train>getTrainByST(Station a,Station b,Date date){
         if(stTrain.count(make_pair(a,b))){
@@ -39,6 +41,9 @@ public:
 	Train getTrainByID(string id){
         return trainMap[id];
 	}
+    string getName(string id){
+        return nameMap[id];
+    }
 	void addTrain(Train train){
         if(trainMap.count(train.getID()))
             return ;
@@ -49,12 +54,31 @@ public:
                 stTrain[make_pair(way[i],way[j])].insert(train.getID());
             }
         }
-	}
+    }
     void addTrainFromCSV(ifstream &fin){
         shared_ptr<CSVParser> csv(new CSVParser());
         vector<Train>trains=csv->process(fin);
         for(auto &x:trains)
             addTrain(x);
+    }
+    void addLogFromFile(ifstream &fin){
+        shared_ptr<CSVParser> csv(new CSVParser());
+        vector<Log>newLogs=csv->processLog(fin);
+        int T=0;
+        for(auto &x:newLogs){
+            if(!nameMap.count(x.id)){
+                nameMap[x.id]=x.name;
+                pwdMap[x.id]="000000";
+            }
+            T++;
+            if(T%10000==0)
+                qDebug()<<T/10000<<'\n';
+            if(x.ty==1){
+                buyTicket(x.id,x.ticket.getTrain(),x.ticket.getStart(),x.ticket.getTarget(),x.ticket.getLevel(),x.ticket.getNum(),x.ticket.getTrainDate());
+            }else{
+                refund(x.id,x.ticket);
+            }
+        }
     }
 
 	void updateTrain(Train train){
@@ -124,7 +148,7 @@ public:
     void readFromFile(string input="data.bin"){
        InputOfBinary fin(input);
        if(fin){
-           fin>>pwdMap>>nameMap>>adminMap>>allTrain>>trainMap>>stTrain>>ticketMap;
+           fin>>pwdMap>>nameMap>>adminMap>>allTrain>>trainMap>>stTrain>>ticketMap>>Logs;
        }else{
            writeToFile(input);
        }
@@ -139,7 +163,7 @@ public:
     }
     void writeToFile(string output="data.bin"){
        OutputOfBinary fout(output);
-       fout<<pwdMap<<nameMap<<adminMap<<allTrain<<trainMap<<stTrain<<ticketMap;
+       fout<<pwdMap<<nameMap<<adminMap<<allTrain<<trainMap<<stTrain<<ticketMap<<Logs;
     }
     ~RailwayMinistry(){
         writeToFile();

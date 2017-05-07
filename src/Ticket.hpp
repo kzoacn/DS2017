@@ -30,7 +30,9 @@ private:
     Date startDate,targetDate;
     Date trainDate;
 public:
-	Ticket(){}
+    Ticket(){}
+    Ticket(const Station &s,const Station &t,const Date &sd,const string &tn,const TicketLevel &l,const int &_num):
+        start(s),target(t),trainDate(sd),train(tn),level(l),num(_num){}
     Ticket(const Station &s,const Station &t,const double &c,const Date &sd,const Date &td,const string &tn,const TicketLevel &l,const int &_num,const Date &_tD):
         start(s),target(t),cost(c),startDate(sd),targetDate(td),train(tn),level(l),num(_num),trainDate(_tD){}
     static TicketLevel toLevel(string s){
@@ -74,10 +76,9 @@ public:
     }
     bool operator==(const Ticket &oth)const{
         return level==oth.level&&train==oth.train
-                &&cost==oth.cost&&start==oth.start
+                &&start==oth.start
                 &&target==oth.target
-                &&startDate==oth.startDate
-                &&targetDate==oth.targetDate;
+                &&trainDate==oth.trainDate;
     }
     Date getTrainDate()const{
         return trainDate;

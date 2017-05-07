@@ -1,4 +1,4 @@
-#ifndef MINEWINDOW_H
+﻿#ifndef MINEWINDOW_H
 #define MINEWINDOW_H
 #include <QMainWindow>
 #include "src/lib/shared_ptr.hpp"
@@ -21,6 +21,10 @@ public:
 
 private slots:
     void on_queryTicket_clicked();
+
+    void on_yes_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::MineWindow *ui;
