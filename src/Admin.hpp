@@ -38,6 +38,11 @@ public:
         if(fin)
             rw->addLogFromFile(fin);
     }
+    void exportLog(string output){
+        ofstream fout(output);
+        if(fout)
+            rw->exportLog(fout);
+    }
 
 };
 

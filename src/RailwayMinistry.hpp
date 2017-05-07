@@ -31,8 +31,7 @@ public:
             vector<Train>ans;
             for(auto id:tmp){
                 Train train=getTrainByID(id);
-                if(train.getStartTime()>=date)
-                    ans.push_back(train);
+                ans.push_back(train);
             }
             return ans;
         }
@@ -60,6 +59,13 @@ public:
         vector<Train>trains=csv->process(fin);
         for(auto &x:trains)
             addTrain(x);
+    }
+    void exportLog(ofstream &fout){
+        for(auto x:Logs){
+            fout<<x.to_string()<<'\n';
+            qDebug()<<QString::fromStdString(x.to_string())<<'\n';
+        }
+        fout.close();
     }
     void addLogFromFile(ifstream &fin){
         shared_ptr<CSVParser> csv(new CSVParser());
@@ -108,12 +114,15 @@ public:
 
 
     pair<Ticket,bool> buyTicket(string id,string trainid,Station a,Station b,TicketLevel level,int num,Date date){
-        if(!trainMap.count(trainid)||!trainMap[trainid].canSell(date))
+        if(!trainMap.count(trainid))
             return make_pair(Ticket(),false);
-        if(!trainMap[trainid].canBuy(a,b,level))
+        Train &train=trainMap[trainid];
+        train.init(date);
+        if(!train.canBuy(a,b,level)||!train.canSell(date)||train.getRestTicket(a,b,level,date)==0)
             return make_pair(Ticket(),false);
-        Ticket ticket=trainMap[trainid].buyTicket(a,b,level,num,date);
+        Ticket ticket=train.buyTicket(a,b,level,num,date);
         ticketMap[id].push_back(ticket);
+        Logs.push_back(Log(id,nameMap[id],1,ticket));
         return make_pair(ticket,true);
 	}
 	bool refund(string id,Ticket ticket){
@@ -121,6 +130,7 @@ public:
 
         if(find(tickets.begin(),tickets.end(),ticket)!=tickets.end()){
             tickets.erase(find(tickets.begin(),tickets.end(),ticket));
+            Logs.push_back(Log(id,nameMap[id],0,ticket));
             return true;
         }
         return false;

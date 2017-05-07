@@ -50,7 +50,8 @@ void MainWindow::on_search_clicked()
     Station a,b;
     a=Station(ui->start->text().toStdString());
     b=Station(ui->target->text().toStdString());
-    Date date(2017,3,28,0,0);
+    Date date;
+    date=Date::fromDay(ui->date->text().toStdString());
     vector<Train>trains=user.getTrainByST(a,b,date);
     for(int i=0;i<trains.size();i++){
         model->setItem(i,0,new QStandardItem(QString::fromStdString(trains[i].getID())));
@@ -75,9 +76,34 @@ void MainWindow::on_search_clicked()
 void MainWindow::on_train_query_clicked()
 {
     QStandardItemModel  *model = new QStandardItemModel();
-    model->setColumnCount(19);
-    model->setHeaderData(0,Qt::Horizontal,tr("车次"));
+    model->setColumnCount(13);
+    model->setHeaderData(0,Qt::Horizontal,tr("站点"));
+    model->setHeaderData(1,Qt::Horizontal,tr("时间"));
+    model->setHeaderData(2,Qt::Horizontal,tr("二等座"));
+    model->setHeaderData(3,Qt::Horizontal,tr("一等座"));
+    model->setHeaderData(4,Qt::Horizontal,tr("商务座"));
+    model->setHeaderData(5,Qt::Horizontal,tr("特等座"));
+    model->setHeaderData(6,Qt::Horizontal,tr("无座"));
+    model->setHeaderData(7,Qt::Horizontal,tr("软座"));
+    model->setHeaderData(8,Qt::Horizontal,tr("硬座"));
+    model->setHeaderData(9,Qt::Horizontal,tr("高级软卧"));
+    model->setHeaderData(10,Qt::Horizontal,tr("软卧下"));
+    model->setHeaderData(11,Qt::Horizontal,tr("硬卧下"));
     Train train=user.getTrainByID(ui->train_number->text().toStdString());
+    Date date;
+    date=Date::fromDay(ui->date->text().toStdString());
+
+    for(int i=0;i<train.getWay().size();i++){
+        Station a=train.getWay()[i];
+        model->setItem(i,0,new QStandardItem(QString::fromStdString(a.getName())));
+        model->setItem(i,1,new QStandardItem(QString::fromStdString(train.getTime(date,a).to_string())));
+        for(int l=0;l<10;l++){
+            if(train.getCost(train.getStart(),a,Ticket::toLevel(l))==0)
+                model->setItem(i,2+l,new QStandardItem("-"));
+            else
+                model->setItem(i,2+l,new QStandardItem(QString::fromStdString(to_string((train.getCost(train.getStart(),a,Ticket::toLevel(l)))))));
+        }
+    }
 
     ui->tableView->setModel(model);
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
@@ -93,7 +119,8 @@ void MainWindow::on_buy_clicked()
     Station a,b;
     a=Station(ui->start->text().toStdString());
     b=Station(ui->target->text().toStdString());
-    Date date(2017,3,28,0,0);
+    Date date;
+    date=Date::fromDay(ui->date->text().toStdString());
     TicketLevel level=Ticket::toLevel(ui->tableView->model()->headerData(col,Qt::Horizontal).toString().toStdString());
     bool succ=user.buyTicket(trainid,a,b,level,1,date).second;
     if(succ)

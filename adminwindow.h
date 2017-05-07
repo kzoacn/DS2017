@@ -31,6 +31,8 @@ private slots:
 
     void on_query_user_clicked();
 
+    void on_export_log_clicked();
+
 private:
     Ui::AdminWindow *ui;
 };

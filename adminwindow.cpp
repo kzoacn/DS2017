@@ -60,3 +60,14 @@ void AdminWindow::on_query_user_clicked()
     mine->load(id,admin.rw);
     mine->show();
 }
+
+void AdminWindow::on_export_log_clicked()
+{
+    QString path = QFileDialog::getSaveFileName(this,tr("选择导出文件"),".",tr("Log File (*.log)"));
+    if(path.length() == 0) {
+           QMessageBox::information(NULL, tr("Path"), tr("You didn't select any files."));
+     } else {
+        admin.exportLog(path.toStdString());
+        QMessageBox::information(NULL, tr("Path"), tr("Success!"));
+     }
+}

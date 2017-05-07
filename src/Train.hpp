@@ -78,7 +78,6 @@ public:
 		return ans;
 	}
     Ticket buyTicket(Station a,Station b,TicketLevel level,int num,Date date){
-        init(date);
         Sold.insert(date);
 		int start=0;
 		for(int i=0;i<way.size();i++){

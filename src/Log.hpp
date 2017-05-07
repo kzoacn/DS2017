@@ -24,7 +24,7 @@ public:
         ans+="tickets of ";
         ans+=ticket.getTrain()+" ";
         ans+=string("from ")+ticket.getStart().getName()+" to "+ticket.getTarget().getName()+" ";
-        ans+="in "+ticket.getStartDate().to_string();
+        ans+="in "+ticket.getStartDate().to_dayString();
         return ans;
    }
    friend OutputOfBinary & operator << (OutputOfBinary & cout, const Log &log) {

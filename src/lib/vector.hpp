@@ -191,7 +191,7 @@ namespace sjtu {
             }
         };
 
-        vector(int Maxsize = 10) : maxsize(Maxsize), siz(0) {
+        vector(int Maxsize = 1) : maxsize(Maxsize), siz(0) {
             a = (T*):: operator new(maxsize * sizeof(T));
         }
 
