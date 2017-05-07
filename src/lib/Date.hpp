@@ -191,6 +191,9 @@ namespace sjtu {
 		Date(const date& dt) :dt(dt) {}
         Date(const Date& ex) :dt(ex.dt) {}
         Date(int y, int m, int d, int h,int min):dt(y,m,d,h,min){}
+        Date to_day(){
+            return Date(dt.y,dt.m,dt.d,0,0);
+        }
         friend int operator-(Date a, Date b) {
             if (a.dt > b.dt) return a.dt - b.dt;
             else return -(b.dt - a.dt);

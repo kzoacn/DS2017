@@ -27,13 +27,14 @@ public:
     void removeTrain(string id){
         rw->removeTrain(id);
     }
-    void startSale(string id){
-        rw->startSale(id);
+    void startSale(string id,Date date){
+        rw->startSale(id,date);
     }
-    bool endSale(string id){
-        return rw->endSale(id);
+    bool endSale(string id,Date date){
+        return rw->endSale(id,date);
     }
 
 };
+
 }
 #endif

@@ -54,8 +54,8 @@ private:
         vector<Station> _way;
         vector<Date>_date;
         vector<vector<double> >_price;
-        vector<vector<int> >_restTicket;
-        _restTicket.resize(way.size());
+        //vector<vector<int> >_restTicket;
+        //_restTicket.resize(way.size());
         for(auto x:way)
             _way.push_back(Station(x));
 
@@ -80,12 +80,12 @@ private:
         for(auto x:seat){
             mp.push_back(Ticket::toLevel(x));
         }
-        for(int i=0;i<_restTicket.size();i++){
+        /*for(int i=0;i<_restTicket.size();i++){
             _restTicket[i].resize(10);
             for(auto x:mp){
                 _restTicket[i][x]=2000;
             }
-        }
+        }*/
 
         for(int i=0;i<price.size();i++){
             _price.push_back(vector<double>());
@@ -102,7 +102,7 @@ private:
         dis.clear();
         seat.clear();
         price.clear();
-        Train train(id,_way,_date,_price,_restTicket);
+        Train train(id,_way,_date,_price);
         return train;
     }
 

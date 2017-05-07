@@ -22,15 +22,17 @@ enum TicketLevel{
 
 class Ticket{
 private:
+    int num;
     TicketLevel level;
 	string train;
 	double cost;
 	Station start,target;
     Date startDate,targetDate;
+    Date trainDate;
 public:
 	Ticket(){}
-	Ticket(const Station &s,const Station &t,const double &c,const Date &sd,const Date &td,const string &tn,const TicketLevel &l):
-        start(s),target(t),cost(c),startDate(sd),targetDate(td),train(tn),level(l){}
+    Ticket(const Station &s,const Station &t,const double &c,const Date &sd,const Date &td,const string &tn,const TicketLevel &l,const int &_num,const Date &_tD):
+        start(s),target(t),cost(c),startDate(sd),targetDate(td),train(tn),level(l),num(_num),trainDate(_tD){}
     static TicketLevel toLevel(string s){
         if(QString::fromStdString(s)==QString::fromLocal8Bit("二等座"))return SECOND_SEAT;
         if(s=="一等座")return FIRST_SEAT;
@@ -57,6 +59,19 @@ public:
         if(x==9)return HARD_BED;
         return NO_SEAT;
     }
+    static string to_string(TicketLevel level){
+        if(level==SECOND_SEAT)return "二等座";
+        if(level==FIRST_SEAT)return "一等座";
+        if(level==BUSINESS_SEAT)return "商务座";
+        if(level==SPECIAL_SEAT)return "特等座";
+        if(level==NO_SEAT)return "无座";
+        if(level==SOFT_SEAT)return "软座";
+        if(level==HARD_SEAT)return "硬座";
+        if(level==AD_SOFT_BED)return "高级软卧";
+        if(level==SOFT_BED)return "软卧";
+        if(level==HARD_BED)return "硬卧";
+        return "处女座";
+    }
     bool operator==(const Ticket &oth)const{
         return level==oth.level&&train==oth.train
                 &&cost==oth.cost&&start==oth.start
@@ -64,9 +79,15 @@ public:
                 &&startDate==oth.startDate
                 &&targetDate==oth.targetDate;
     }
+    Date getTrainDate()const{
+        return trainDate;
+    }
     const double& getCost()const{
-		return cost;
-	}
+        return cost;
+    }
+    const int& getNum()const{
+        return num;
+    }
 	const string& getTrain()const{
 		return train;
 	}
@@ -87,12 +108,12 @@ public:
     }
     friend InputOfBinary& operator >> (InputOfBinary &cin,Ticket &ticket){
         int l;
-        cin>>l>>ticket.train>>ticket.cost>>ticket.start>>ticket.target>>ticket.startDate>>ticket.targetDate;
+        cin>>l>>ticket.train>>ticket.cost>>ticket.start>>ticket.target>>ticket.startDate>>ticket.targetDate>>ticket.num;
         ticket.level=(TicketLevel)l;
         return cin;
     }
     friend OutputOfBinary& operator << (OutputOfBinary &cout,const Ticket &ticket){
-        cout<<int(ticket.level)<<ticket.train<<ticket.cost<<ticket.start<<ticket.target<<ticket.startDate<<ticket.targetDate;
+        cout<<int(ticket.level)<<ticket.train<<ticket.cost<<ticket.start<<ticket.target<<ticket.startDate<<ticket.targetDate<<ticket.num;
         return cout;
     }
 };
