@@ -8,6 +8,7 @@
 #include "lib/Date.hpp"
 #include "lib/shared_ptr.hpp"
 #include "Train.hpp"
+#include "Log.hpp"
 #include <QString>
 #include <QDebug>
 
@@ -124,7 +125,7 @@ public:
             sin.imbue(std::locale(std::locale(), new csv_reader()));
             string tmp;
             sin>>tmp;
-           // qDebug()<<QString::fromStdString(tmp)<<" "<<is_alpha(tmp[0])<<" "<<second<<endl;
+            qDebug()<<QString::fromStdString(tmp)<<" "<<is_alpha(tmp[0])<<" "<<second<<endl;
             if(is_alpha(tmp[0])){
                 if(id!="")ans.push_back(push());
                 id=tmp;
@@ -155,6 +156,41 @@ public:
         return ans;
     }
 
+
+    vector<string>split(string s){
+        vector<string>vec;
+        string tmp;
+        for(int i=0;i<s.length();i++){
+            if(isblank(s[i])){
+                if(!tmp.empty())
+                    vec.push_back(tmp);
+                tmp="";
+            }else{
+                tmp+=s[i];
+            }
+        }
+        if(!tmp.empty())
+            vec.push_back(tmp);
+        return vec;
+    }
+    vector<Log> processLog(ifstream &fin){
+        vector<Log>Logs;
+        string s;
+        int T=0;
+        while(getline(fin,s)){
+            if(is_digit(s[0]))continue;
+            vector<string>vec=split(s);
+            Logs.push_back(Log());
+            Log &lg=Logs.back();
+            if(++T%10000==0)
+                qDebug()<<T/10000<<'\n';
+            //for(auto x:vec)
+            //    qDebug()<<QString::fromStdString(x)<<'\n';
+            Ticket tic=Ticket(Station(vec[9]),Station(vec[11]),Date::fromDay(vec[13]),vec[7],Ticket::toLevel(vec[4]),to_int(vec[3]));
+            lg=Log(vec[1],vec[0],vec[2][0]=='b'?1:0,tic);
+        }
+        return Logs;
+    }
 };
 
 }

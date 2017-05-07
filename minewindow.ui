@@ -17,75 +17,71 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="1">
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="1" column="0">
+      <item row="0" column="1">
+       <widget class="QLabel" name="username">
+        <property name="text">
+         <string>kzoacn</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="new_pwd2"/>
+      </item>
+      <item row="2" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>旧密码</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>kzoacn</string>
-        </property>
-       </widget>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="old_pwd"/>
       </item>
       <item row="4" column="1">
-       <widget class="QLineEdit" name="lineEdit_2"/>
+       <widget class="QLineEdit" name="new_pwd"/>
       </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEdit"/>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_3"/>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>新密码</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="QLabel" name="label_6">
-        <property name="text">
-         <string>TextLabel</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>TextLabel</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
+      <item row="5" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
          <string>重复</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="label_7">
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>TextLabel</string>
+         <string>新密码</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
-       <widget class="QLabel" name="label_8">
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>TextLabel</string>
+         <string>新昵称</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_9">
         <property name="text">
+         <string>昵称</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="new_name"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
          <string>用户名</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="user">
+        <property name="text">
+         <string>TextLabel</string>
         </property>
        </widget>
       </item>
@@ -108,6 +104,16 @@
        </widget>
       </item>
       <item>
+<<<<<<< HEAD
+=======
+       <widget class="QPushButton" name="yes">
+        <property name="text">
+         <string>确认</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+>>>>>>> 116ebc74b3bda5adbe9cd4d45280c63a08fde1dd
        <widget class="QPushButton" name="exit">
         <property name="text">
          <string>退出</string>
@@ -117,7 +123,17 @@
      </layout>
     </item>
     <item row="2" column="1">
-     <widget class="QTableView" name="tableView"/>
+     <widget class="QTableView" name="tableView">
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+     </widget>
     </item>
     <item row="0" column="2">
      <widget class="QLabel" name="label_10">
@@ -134,7 +150,7 @@
      <x>0</x>
      <y>0</y>
      <width>559</width>
-     <height>28</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
@@ -149,8 +165,13 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
+<<<<<<< HEAD
      <x>508</x>
      <y>354</y>
+=======
+     <x>511</x>
+     <y>353</y>
+>>>>>>> 116ebc74b3bda5adbe9cd4d45280c63a08fde1dd
     </hint>
     <hint type="destinationlabel">
      <x>279</x>

@@ -25,6 +25,12 @@ private slots:
 
     void on_load_clicked();
 
+    void on_open_log_clicked();
+
+    void on_load_log_clicked();
+
+    void on_query_user_clicked();
+
 private:
     Ui::AdminWindow *ui;
 };

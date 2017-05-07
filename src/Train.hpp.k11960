@@ -1,0 +1,100 @@
+﻿#pragma once
+
+#ifndef TRAIN_HPP
+#define TRAIN_HPP
+
+#include "Station.hpp"
+#include "Ticket.hpp"
+#include "lib/vector.hpp"
+#include "lib/Date.hpp"
+#include "FileManager.hpp"
+
+namespace sjtu{
+
+class Train{
+private:
+    string id;
+	vector<Station>way;
+	vector<Date>date;
+	vector<vector<double> >price;
+	vector<vector<int> >restTicket;
+public:
+    Train(){}
+    Train(string _id,vector<Station> _way,vector<Date>_date,vector<vector<double> >_price,vector<vector<int> >_restTicket):
+        id(_id),way(_way),date(_date),price(_price),restTicket(_restTicket){sale=isSold=false;}
+	Station getStart(){
+		return way.front();
+	}
+    Station getTarget(){
+		return way.back();
+	}
+	vector<Station> getWay(){
+		return way;
+	}
+	double getCost(Station a,Station b,TicketLevel level){
+		double x,y;
+		for(int i=0;i<way.size();i++){
+			if(way[i]==a){
+                x=price[i][int(level)];
+			}
+			if(way[i]==b){
+                y=price[i][int(level)];
+			}
+		}
+		return y-x;
+    }
+    Date getTime(Station station){
+        for(int i=0;i<way.size();i++)
+            if(way[i]==station)
+                return date[i];
+        throw "No such station!";
+    }
+    Date getStartTime(){
+        return date.front();
+    }
+	int getRestTicket(Station a,Station b,TicketLevel level){
+		int ans=int(2e9),start=0;
+		for(int i=0;i<way.size();i++){
+			if(way[i]==a)start=1;
+			if(way[i]==b)break;
+			if(start)
+                ans=min(ans,restTicket[i][level]);
+		}
+		return ans;
+	}
+    Ticket buyTicket(Station a,Station b,TicketLevel level){
+        isSold=true;
+		int start=0;
+		for(int i=0;i<way.size();i++){
+			if(way[i]==a)start=1;
+			if(way[i]==b)break;
+			if(start)
+                restTicket[i][level]--;
+		}
+        return Ticket(a,b,getCost(a,b,level),getTime(a),getTime(b),id,level);
+	}
+	void refundTicket(Station a,Station b,TicketLevel level,int num){
+		int start=0;
+		for(int i=0;i<way.size();i++){
+			if(way[i]==a)start=1;
+			if(way[i]==b)break;
+			if(start)
+                restTicket[i][level]+=num;
+		}
+	}
+
+	string getID(){
+		return id;
+    }
+    friend InputOfBinary& operator >> (InputOfBinary &cin,Train &train){
+        cin>>train.id>>train.sale>>train.isSold>>train.way>>train.date>>train.price>>train.restTicket;
+        return cin;
+    }
+    friend OutputOfBinary& operator << (OutputOfBinary &cout,const Train &train){
+        cout<<train.id<<train.sale<<train.isSold<<train.way<<train.date<<train.price<<train.restTicket;
+        return cout;
+    }
+};
+
+}
+#endif

@@ -1,4 +1,4 @@
-#include "minewindow.h"
+﻿#include "minewindow.h"
 #include "ui_minewindow.h"
 #include <QStandardItemModel>
 #include <QString>
@@ -23,6 +23,8 @@ MineWindow::~MineWindow()
 
 void MineWindow::load(string id, shared_ptr<RailwayMinistry> _rm){
     user=User(id,_rm);
+    ui->user->setText(QString::fromStdString(id));
+    ui->username->setText(QString::fromStdString(_rm->getName(id)));
 }
 
 void MineWindow::on_queryTicket_clicked()
@@ -54,4 +56,31 @@ void MineWindow::on_queryTicket_clicked()
     ui->tableView->setModel(model);
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
+}
+
+void MineWindow::on_yes_clicked()
+{
+    if(ui->old_pwd->text()!=QString::fromStdString("")){
+        if(user.login(user.id,ui->old_pwd->text().toStdString())){
+            if(ui->new_pwd->text()==ui->new_pwd2->text()){
+                string new_pwd=ui->new_pwd->text().toStdString();
+                string new_name=ui->new_name->text().toStdString();
+                if(new_name=="")new_name=user.rw->getName(user.id);
+                user.rw->updateInfo(user.id,new_pwd,new_name);
+                QMessageBox::information(this,tr("提示"),tr("修改成功!"));
+            }else{
+                QMessageBox::warning(this,tr("警告"),tr("两次输入密码不一致"));
+            }
+        }
+    }else{
+        QMessageBox::warning(this,tr("警告"),tr("旧密码不正确"));
+    }
+}
+
+void MineWindow::on_pushButton_2_clicked()
+{
+    int row=ui->tableView->currentIndex().row();
+    vector<Ticket>tickets=user.queryTicket();
+    user.refund(tickets[row-1]);
+    QMessageBox::information(NULL, tr("提示"), tr("退票成功"));
 }

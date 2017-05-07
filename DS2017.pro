@@ -49,7 +49,8 @@ HEADERS  += mainwindow.h \
     minewindow.h \
     src/lib/exceptions.hpp \
     src/lib/utility.hpp \
-    src/LoginManager.hpp
+    src/LoginManager.hpp \
+    src/Log.hpp
 
 FORMS    += mainwindow.ui \
     logindialog.ui \

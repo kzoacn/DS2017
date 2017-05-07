@@ -220,11 +220,33 @@ namespace sjtu {
             ans[1]=(x%10+'0');
             return ans;
         }
+        string to_dayString()const{
+            string ans;
+            int y=int(dt.y),m=int(dt.m),d=int(dt.d),h=int(dt.t.hour),min=int(dt.t.minute);
+            ans="2017-"+to_string(m)+"-"+to_string(d);
+            return ans;
+        }
+        static vector<int>getNums(const string &s){
+            int x=0;vector<int>vec;
+            for(int i=0;i<s.length();){
+                x=0;
+                while(i<s.length()&&!isdigit(s[i]))i++;
+                while(i<s.length()&&isdigit(s[i]))
+                    x=x*10+s[i]-'0',i++;
+                vec.push_back(x);
+            }
+            return vec;
+        }
+        static Date fromDay(string s){
+            vector<int>vec=getNums(s);
+            Date dt(vec[0],vec[1],vec[2],0,0);
+            return dt;
+        }
 
         string to_string()const{
             string ans;
             int y=int(dt.y),m=int(dt.m),d=int(dt.d),h=int(dt.t.hour),min=int(dt.t.minute);
-            ans=to_string(y)+" "+to_string(m)+" "+to_string(d)+" "+to_string(h)+" "+to_string(min);
+            ans=to_string(y)+"-"+to_string(m)+"-"+to_string(d)+" "+to_string(h)+":"+to_string(min);
             return ans;
         }
 

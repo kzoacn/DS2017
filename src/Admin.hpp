@@ -33,6 +33,11 @@ public:
     bool endSale(string id,Date date){
         return rw->endSale(id,date);
     }
+    void addLogFromFile(string path){
+        ifstream fin(path);
+        if(fin)
+            rw->addLogFromFile(fin);
+    }
 
 };
 

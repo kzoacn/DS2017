@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_3">
+   <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0" colspan="2">
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
@@ -78,7 +78,7 @@
       </item>
      </layout>
     </item>
-    <item row="1" column="0" colspan="2">
+    <item row="1" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <widget class="QLabel" name="label">
@@ -112,10 +112,10 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="userid"/>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_10">
+       <widget class="QPushButton" name="query_user">
         <property name="text">
          <string>查询</string>
         </property>
@@ -124,6 +124,41 @@
      </layout>
     </item>
     <item row="2" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>日志</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="log_path"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="open_log">
+        <property name="text">
+         <string>选择日志</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="load_log">
+        <property name="text">
+         <string>导入</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="export_log">
+        <property name="text">
+         <string>导出日志</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="0">
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
        <widget class="QTableView" name="tableView_2">
@@ -149,7 +184,7 @@
       </item>
      </layout>
     </item>
-    <item row="2" column="1">
+    <item row="3" column="1">
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
        <widget class="QPushButton" name="pushButton_11">
@@ -176,13 +211,6 @@
        <widget class="QPushButton" name="pushButton_5">
         <property name="text">
          <string>开关发售</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_8">
-        <property name="text">
-         <string>导出日志</string>
         </property>
        </widget>
       </item>
