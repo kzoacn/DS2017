@@ -94,7 +94,7 @@
     <item row="2" column="2">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="queryTicket">
         <property name="text">
          <string>查询购票</string>
         </property>
@@ -134,7 +134,7 @@
      <x>0</x>
      <y>0</y>
      <width>559</width>
-     <height>23</height>
+     <height>28</height>
     </rect>
    </property>
   </widget>

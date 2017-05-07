@@ -7,6 +7,7 @@
 #include "src/RailwayMinistry.hpp"
 #include "src/Station.hpp"
 #include <QMessageBox>
+#include "minewindow.h"
 using namespace sjtu;
 using std::to_string;
 MainWindow::MainWindow(QWidget *parent) :
@@ -101,5 +102,7 @@ void MainWindow::on_buy_clicked()
 
 void MainWindow::on_mine_clicked()
 {
-
+    MineWindow *mine=new MineWindow(this);
+    mine->load(user.id,user.rw);
+    mine->show();
 }

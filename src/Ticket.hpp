@@ -59,6 +59,19 @@ public:
         if(x==9)return HARD_BED;
         return NO_SEAT;
     }
+    static string to_string(TicketLevel level){
+        if(level==SECOND_SEAT)return "二等座";
+        if(level==FIRST_SEAT)return "一等座";
+        if(level==BUSINESS_SEAT)return "商务座";
+        if(level==SPECIAL_SEAT)return "特等座";
+        if(level==NO_SEAT)return "无座";
+        if(level==SOFT_SEAT)return "软座";
+        if(level==HARD_SEAT)return "硬座";
+        if(level==AD_SOFT_BED)return "高级软卧";
+        if(level==SOFT_BED)return "软卧";
+        if(level==HARD_BED)return "硬卧";
+        return "处女座";
+    }
     bool operator==(const Ticket &oth)const{
         return level==oth.level&&train==oth.train
                 &&cost==oth.cost&&start==oth.start

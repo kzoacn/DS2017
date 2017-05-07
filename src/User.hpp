@@ -10,10 +10,9 @@
 namespace sjtu{
 
 class User{
-protected:
+public:
     string id;
     shared_ptr<RailwayMinistry>rw;
-public:
     User(){}
     User(string _id,shared_ptr<RailwayMinistry> _rw):id(_id),rw(_rw){}
 
