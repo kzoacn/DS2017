@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QMessageBox>
+#include "minewindow.h"
 using namespace sjtu;
 AdminWindow::AdminWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,4 +34,11 @@ void AdminWindow::on_load_clicked()
 {
     admin.addTrainFromCSV(ui->CSVPath->text().toStdString());
     QMessageBox::information(NULL, tr("Path"), tr("Success!"));
+}
+
+void AdminWindow::on_queryInfo_clicked()
+{
+    MineWindow *mine=new MineWindow();
+    mine->load(ui->user->text().toStdString(),admin.rw);
+    mine->show();
 }

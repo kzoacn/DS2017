@@ -1,7 +1,11 @@
-订票加上num
+订票加上num 
 
-Ticket的starttime不对
+Ticket的starttime不对 done
 常量引用卡常数
+
+鲁棒性加强
+
+退票
 
 导入用户信息
 	log系统

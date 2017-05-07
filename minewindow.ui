@@ -108,7 +108,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="exit">
         <property name="text">
          <string>退出</string>
         </property>
@@ -141,5 +141,22 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>exit</sender>
+   <signal>clicked()</signal>
+   <receiver>MineWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>508</x>
+     <y>354</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>209</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
