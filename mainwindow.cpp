@@ -49,14 +49,15 @@ void MainWindow::on_search_clicked()
     Station a,b;
     a=Station(ui->start->text().toStdString());
     b=Station(ui->target->text().toStdString());
-    vector<Train>trains=user.getTrainByST(a,b,Date(1998,1,1,12,12));
+    Date date(2017,3,28,0,0);
+    vector<Train>trains=user.getTrainByST(a,b,date);
     for(int i=0;i<trains.size();i++){
         model->setItem(i,0,new QStandardItem(QString::fromStdString(trains[i].getID())));
         model->setItem(i,1,new QStandardItem(QString::fromStdString(a.getName())));
         model->setItem(i,2,new QStandardItem(QString::fromStdString(b.getName())));
-        model->setItem(i,3,new QStandardItem(QString::fromStdString(trains[i].getTime(a).to_string())));
-        model->setItem(i,4,new QStandardItem(QString::fromStdString(trains[i].getTime(b).to_string())));
-        model->setItem(i,5,new QStandardItem(QString::fromStdString(to_string((trains[i].getTime(b)-trains[i].getTime(a))))));
+        model->setItem(i,3,new QStandardItem(QString::fromStdString(trains[i].getTime(date,a).to_string())));
+        model->setItem(i,4,new QStandardItem(QString::fromStdString(trains[i].getTime(date,b).to_string())));
+        model->setItem(i,5,new QStandardItem(QString::fromStdString(to_string((trains[i].getTime(date,b)-trains[i].getTime(date,a))))));
         for(int l=0;l<10;l++){
             if(trains[i].getCost(a,b,Ticket::toLevel(l))==0)
                 model->setItem(i,6+l,new QStandardItem("-"));
@@ -91,8 +92,9 @@ void MainWindow::on_buy_clicked()
     Station a,b;
     a=Station(ui->start->text().toStdString());
     b=Station(ui->target->text().toStdString());
+    Date date(2017,3,28,0,0);
     TicketLevel level=Ticket::toLevel(ui->tableView->model()->headerData(col,Qt::Horizontal).toString().toStdString());
-    user.buyTicket(trainid,a,b,level);
+    user.buyTicket(trainid,a,b,level,1,date);
     QMessageBox::information(NULL, tr("提示"), tr("购票成功"));
 }
 

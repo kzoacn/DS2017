@@ -28,11 +28,14 @@ public:
     vector<Train>getTrainByST(Station a,Station b,Date date){
         return rw->getTrainByST(a,b,date);
     }
+    vector<Ticket> queryTicket(){
+        return rw->queryTicket(id);
+    }
     Train getTrainByID(string id){
         return rw->getTrainByID(id);
     }
-    Ticket buyTicket(string trainid,Station a,Station b,TicketLevel level){
-        return rw->buyTicket(id,trainid,a,b,level);
+    Ticket buyTicket(string trainid,Station a,Station b,TicketLevel level,int num,Date date){
+        return rw->buyTicket(id,trainid,a,b,level,num,date);
     }
     bool refund(Ticket ticket){
         return rw->refund(id,ticket);

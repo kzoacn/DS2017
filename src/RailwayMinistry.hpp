@@ -71,20 +71,20 @@ public:
             }
         }
 	}
-    void startSale(string id){
-        trainMap[id].startSale();
+    void startSale(string id,Date date){
+        trainMap[id].startSale(date);
 	}
-    bool endSale(string id){
-        if(trainMap[id].hasSold()){
+    bool endSale(string id,Date date){
+        if(trainMap[id].hasSold(date)){
             return false;
         }
-        trainMap[id].endSale();
+        trainMap[id].endSale(date);
         return true;
 	}
 
 
-    Ticket buyTicket(string id,string trainid,Station a,Station b,TicketLevel level){
-        Ticket ticket=trainMap[trainid].buyTicket(a,b,level);
+    Ticket buyTicket(string id,string trainid,Station a,Station b,TicketLevel level,int num,Date date){
+        Ticket ticket=trainMap[trainid].buyTicket(a,b,level,num,date);
         ticketMap[id].push_back(ticket);
         return ticket;
 	}
@@ -96,6 +96,9 @@ public:
         }
         return false;
 	}
+    vector<Ticket> queryTicket(string id){
+        return ticketMap[id];
+    }
 	bool updateInfo(string id,string pwd,string name){
 		pwdMap[id]=pwd;
 		nameMap[id]=name;

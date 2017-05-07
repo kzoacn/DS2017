@@ -22,15 +22,17 @@ enum TicketLevel{
 
 class Ticket{
 private:
+    int num;
     TicketLevel level;
 	string train;
 	double cost;
 	Station start,target;
     Date startDate,targetDate;
+    Date trainDate;
 public:
 	Ticket(){}
-	Ticket(const Station &s,const Station &t,const double &c,const Date &sd,const Date &td,const string &tn,const TicketLevel &l):
-        start(s),target(t),cost(c),startDate(sd),targetDate(td),train(tn),level(l){}
+    Ticket(const Station &s,const Station &t,const double &c,const Date &sd,const Date &td,const string &tn,const TicketLevel &l,const int &_num,const Date &_tD):
+        start(s),target(t),cost(c),startDate(sd),targetDate(td),train(tn),level(l),num(_num),trainDate(_tD){}
     static TicketLevel toLevel(string s){
         if(QString::fromStdString(s)==QString::fromLocal8Bit("二等座"))return SECOND_SEAT;
         if(s=="一等座")return FIRST_SEAT;
@@ -64,9 +66,15 @@ public:
                 &&startDate==oth.startDate
                 &&targetDate==oth.targetDate;
     }
+    Date getTrainDate()const{
+        return trainDate;
+    }
     const double& getCost()const{
-		return cost;
-	}
+        return cost;
+    }
+    const int& getNum()const{
+        return num;
+    }
 	const string& getTrain()const{
 		return train;
 	}
@@ -87,12 +95,12 @@ public:
     }
     friend InputOfBinary& operator >> (InputOfBinary &cin,Ticket &ticket){
         int l;
-        cin>>l>>ticket.train>>ticket.cost>>ticket.start>>ticket.target>>ticket.startDate>>ticket.targetDate;
+        cin>>l>>ticket.train>>ticket.cost>>ticket.start>>ticket.target>>ticket.startDate>>ticket.targetDate>>ticket.num;
         ticket.level=(TicketLevel)l;
         return cin;
     }
     friend OutputOfBinary& operator << (OutputOfBinary &cout,const Ticket &ticket){
-        cout<<int(ticket.level)<<ticket.train<<ticket.cost<<ticket.start<<ticket.target<<ticket.startDate<<ticket.targetDate;
+        cout<<int(ticket.level)<<ticket.train<<ticket.cost<<ticket.start<<ticket.target<<ticket.startDate<<ticket.targetDate<<ticket.num;
         return cout;
     }
 };
