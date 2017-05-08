@@ -33,6 +33,9 @@ public:
     Train getTrainByID(string id){
         return rw->getTrainByID(id);
     }
+    bool existTrain(string id){
+        return rw->existTrain(id);
+    }
     pair<Ticket,bool> buyTicket(string trainid,Station a,Station b,TicketLevel level,int num,Date date){
         return rw->buyTicket(id,trainid,a,b,level,num,date);
     }

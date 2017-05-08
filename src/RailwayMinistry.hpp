@@ -50,9 +50,12 @@ public:
         }
         return vector<Train>();
     }
-	Train getTrainByID(string id){
+    Train getTrainByID(string id){
         return trainMap[id];
-	}
+    }
+    bool existTrain(string id){
+        return trainMap.count(id);
+    }
     string getName(string id){
         return nameMap[id];
     }
@@ -120,6 +123,10 @@ public:
     void startSale(string id,Date date){
         trainMap[id].startSale(date);
 	}
+    bool hasSold(string id,Date date){
+        return trainMap[id].hasSold(date);
+    }
+
     bool endSale(string id,Date date){
         if(trainMap[id].hasSold(date)){
             return false;
@@ -128,6 +135,7 @@ public:
         return true;
 	}
     bool canSell(string id,Date date){
+        trainMap[id].init(date);
         if(trainMap[id].canSell(date))
             return true;
         return false;

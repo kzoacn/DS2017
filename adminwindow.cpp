@@ -172,6 +172,10 @@ void AdminWindow::on_pushButton_9_clicked()
 void AdminWindow::on_pushButton_3_clicked()
 {
     string id=ui->train_number->text().toStdString();
+    if(!admin.existTrain(id)){
+        QMessageBox::warning(NULL,tr("提示"),tr("没有该车次"));
+        return ;
+    }
     if(admin.removeTrain(id))
         QMessageBox::information(NULL,tr("提示"),tr("删除成功"));
     else
@@ -182,6 +186,14 @@ void AdminWindow::on_pushButton_5_clicked()
 {
     Date date(ui->dateEdit->date());
     string trainid=ui->train_number->text().toStdString();
+    if(!admin.existTrain(trainid)){
+        QMessageBox::warning(NULL,tr("提示"),tr("没有该车次"));
+        return ;
+    }
+    if(!admin.hasSold(trainid,date)){
+        QMessageBox::warning(NULL,tr("提示"),tr("车次已有票售出，不可更改！"));
+        return ;
+    }
     if(admin.canSell(trainid,date)){
         admin.endSale(trainid,date);
         QMessageBox::information(NULL,tr("提示"),tr("已停止发售"));

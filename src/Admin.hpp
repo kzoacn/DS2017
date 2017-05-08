@@ -37,6 +37,10 @@ public:
     bool endSale(string id,Date date){
         return rw->endSale(id,date);
     }
+    bool hasSold(string id,Date date){
+        return rw->hasSold(id,date);
+    }
+
     bool canSell(string id,Date date){
         return rw->canSell(id,date);
     }
