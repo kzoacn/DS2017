@@ -25,7 +25,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="start_2">
+       <widget class="QLineEdit" name="start">
         <property name="text">
          <string>上海</string>
         </property>
@@ -39,7 +39,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="target_2">
+       <widget class="QLineEdit" name="target">
         <property name="text">
          <string>北京</string>
         </property>
@@ -53,18 +53,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="date_2">
-        <property name="text">
-         <string>1926-08-17</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_7">
-        <property name="text">
-         <string>选择日期</string>
-        </property>
-       </widget>
+       <widget class="QDateEdit" name="dateEdit"/>
       </item>
       <item>
        <widget class="QLabel" name="label_10">
@@ -74,7 +63,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="train_number_2"/>
+       <widget class="QLineEdit" name="train_number"/>
       </item>
      </layout>
     </item>
@@ -161,7 +150,7 @@
     <item row="3" column="0">
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
-       <widget class="QTableView" name="tableView_2">
+       <widget class="QTableView" name="tableView">
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
         </property>
@@ -238,7 +227,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>28</height>
     </rect>
    </property>
   </widget>

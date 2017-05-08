@@ -33,6 +33,16 @@ private slots:
 
     void on_export_log_clicked();
 
+    void on_pushButton_11_clicked();
+
+    void on_train_query_2_clicked();
+
+    void on_pushButton_9_clicked();
+
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_5_clicked();
+
 private:
     Ui::AdminWindow *ui;
 };

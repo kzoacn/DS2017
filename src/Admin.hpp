@@ -13,6 +13,10 @@ public:
     Admin(){}
     Admin(string _id,shared_ptr<RailwayMinistry>_rm):
         User(_id,_rm){}
+    vector<Train>getTrainByST(Station a,Station b,Date date){
+        return rw->getTrainBySTForAdmin(a,b,date);
+    }
+
     void addTrain(Train train){
         rw->addTrain(train);
     }
@@ -24,8 +28,8 @@ public:
     void updateTrain(Train train){
         rw->updateTrain(train);
     }
-    void removeTrain(string id){
-        rw->removeTrain(id);
+    bool removeTrain(string id){
+        return rw->removeTrain(id);
     }
     void startSale(string id,Date date){
         rw->startSale(id,date);
@@ -33,6 +37,10 @@ public:
     bool endSale(string id,Date date){
         return rw->endSale(id,date);
     }
+    bool canSell(string id,Date date){
+        return rw->canSell(id,date);
+    }
+
     void addLogFromFile(string path){
         ifstream fin(path);
         if(fin)

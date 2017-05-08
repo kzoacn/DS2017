@@ -31,12 +31,25 @@ public:
             vector<Train>ans;
             for(auto id:tmp){
                 Train train=getTrainByID(id);
+                if(train.canSell(date))
+                    ans.push_back(train);
+            }
+            return ans;
+        }
+        return vector<Train>();
+    }
+    vector<Train>getTrainBySTForAdmin(Station a,Station b,Date date){
+        if(stTrain.count(make_pair(a,b))){
+            set<string>tmp=stTrain[make_pair(a,b)];
+            vector<Train>ans;
+            for(auto id:tmp){
+                Train train=getTrainByID(id);
                 ans.push_back(train);
             }
             return ans;
         }
         return vector<Train>();
-	}
+    }
 	Train getTrainByID(string id){
         return trainMap[id];
 	}
@@ -91,7 +104,9 @@ public:
         removeTrain(train.getID());
         addTrain(train);
 	}
-	void removeTrain(string id){
+    bool removeTrain(string id){
+        if(!trainMap.count(id)||trainMap[id].hasSold())
+            return false;
         Train train=trainMap[id];
         vector<Station>way=train.getWay();
         trainMap.erase(id);
@@ -100,6 +115,7 @@ public:
                 stTrain[make_pair(way[i],way[j])].erase(train.getID());
             }
         }
+        return true;
 	}
     void startSale(string id,Date date){
         trainMap[id].startSale(date);
@@ -111,6 +127,11 @@ public:
         trainMap[id].endSale(date);
         return true;
 	}
+    bool canSell(string id,Date date){
+        if(trainMap[id].canSell(date))
+            return true;
+        return false;
+    }
 
 
     pair<Ticket,bool> buyTicket(string id,string trainid,Station a,Station b,TicketLevel level,int num,Date date){

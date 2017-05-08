@@ -35,7 +35,7 @@ public:
 	}
 	double getCost(Station a,Station b,TicketLevel level){
 		double x,y;
-		for(int i=0;i<way.size();i++){
+        for(int i=0;i<way.size();i++){
 			if(way[i]==a){
                 x=price[i][int(level)];
 			}
@@ -110,7 +110,10 @@ public:
 	}
     bool canSell(Date date){
         return onSale.count(date);
-	}
+    }
+    bool hasSold(){
+        return !Sold.empty();
+    }
     bool hasSold(Date date){
         return Sold.count(date);
     }
