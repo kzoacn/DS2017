@@ -58,4 +58,9 @@ FORMS    += mainwindow.ui \
     adminwindow.ui \
     minewindow.ui
 
+DISTFILES +=
+
+RESOURCES += \
+    res.qrc
+
 
