@@ -45,6 +45,9 @@ public:
     bool updateInfo(string pwd,string name){
         rw->updateInfo(id,pwd,name);
     }
+    vector<Ticket> queryPath(Station a,Station b,Date date){
+        return rw->queryPath(a,b,date);
+    }
 };
 
 }

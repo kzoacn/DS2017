@@ -24,16 +24,16 @@ public:
     Train(){}
     Train(string _id,vector<Station> _way,vector<Date>_date,vector<vector<double> >_price):
         id(_id),way(_way),date(_date),price(_price){}
-	Station getStart(){
+    Station getStart()const{
 		return way.front();
 	}
-    Station getTarget(){
+    Station getTarget()const{
 		return way.back();
 	}
-	vector<Station> getWay(){
+    const vector<Station>& getWay()const{
 		return way;
 	}
-	double getCost(Station a,Station b,TicketLevel level){
+    double getCost(Station a,Station b,TicketLevel level)const{
 		double x,y;
         for(int i=0;i<way.size();i++){
 			if(way[i]==a){
@@ -45,13 +45,19 @@ public:
 		}
 		return y-x;
     }
-    Date getTime(Date dt,Station station){
+    Date getTime(Date dt,Station station)const{
         for(int i=0;i<way.size();i++)
             if(way[i]==station)
                 return date[i]+(dt.to_day()-date[0].to_day());
         throw "No such station!";
     }
-    Date getStartTime(){
+    int getTimeFromStart(Station station){
+        for(int i=0;i<way.size();i++)
+            if(way[i]==station)
+                return date[i]-date[0].to_day();
+    }
+
+    Date getStartTime()const{
         return date.front();
     }
     void init(Date date){
@@ -98,7 +104,7 @@ public:
                 restTicket[ticket.getStartDate()][i][ticket.getLevel()]+=ticket.getNum();
 		}
     }
-    bool canBuy(Station a,Station b,TicketLevel level){
+    bool canBuy(Station a,Station b,TicketLevel level)const{
        return getCost(a,b,level)>1e-4;
     }
     void startSale(Date date){
@@ -108,7 +114,7 @@ public:
         if(onSale.count(date))
             onSale.erase(date);
 	}
-    bool canSell(Date date){
+    bool canSell(Date date)const{
         return onSale.count(date);
     }
     bool hasSold(){
@@ -117,7 +123,7 @@ public:
     bool hasSold(Date date){
         return Sold.count(date);
     }
-	string getID(){
+    string getID()const{
 		return id;
     }
     friend InputOfBinary& operator >> (InputOfBinary &cin,Train &train){

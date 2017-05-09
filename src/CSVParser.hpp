@@ -125,7 +125,7 @@ public:
             sin.imbue(std::locale(std::locale(), new csv_reader()));
             string tmp;
             sin>>tmp;
-            qDebug()<<QString::fromStdString(tmp)<<" "<<is_alpha(tmp[0])<<" "<<second<<endl;
+            //qDebug()<<QString::fromStdString(tmp)<<" "<<is_alpha(tmp[0])<<" "<<second<<endl;
             if(is_alpha(tmp[0])){
                 if(id!="")ans.push_back(push());
                 id=tmp;

@@ -7,31 +7,9 @@
 #include <cstddef>
 #include "utility.hpp"
 #include "exceptions.hpp"
+#include "vector.hpp"
+#include "../FileManager.hpp"
 
-/*
-sdfsd
-f
-sd
-fsd
-f
-sd
-fsd
-f
-sd
-fsd
-f
-sd
-f
-sdf
-sdfssdfdsfs
-df
-sd
-fs
-df
-sdf
-
-sd
-*/
 namespace sjtu{
     template<class T1,class T2>
     pair<T1,T2>make_pair(const T1 &a,const T2 &b){
@@ -148,6 +126,15 @@ namespace sjtu{
             }
             return p;
         }
+        __inline node* build(int l,int r,vector<node*>&nodes){
+            if(l>=r)return NULL;
+            int mid=(l+r)>>1;
+            node *x=nodes[mid];
+            x->c[0]=build(l,mid-1,nodes);
+            x->c[1]=build(mid+1,r,nodes);
+            return x;
+        }
+
         __inline node* insert(const Key & k,const T & v){
             if(count(k)){
                 node *t=_find(root,k);
@@ -335,8 +322,27 @@ namespace sjtu{
                 tail=0;
             }
         }
-        map(const map &other) {
+        map(const vector<pair<Key,T> > &other){
+            if(other.empty()){
+                root=0;head=0;
+                tail=new node();
+                head=tail;
+                return ;
+            }
+            vector<node*>nodes;
+            for(int i=0;i<other.size();i++)
+                nodes.push_back(new node(other[i].first,other[i].second));
             root=head=0;
+            tail=new node();
+            nodes[0]->pre=nodes[0];
+            for(int i=1;i<nodes.size();i++)
+                nodes[i]->pre=nodes[i-1];
+            for(int i=0;i+1<nodes.size();i++)
+                nodes[i]->nxt=nodes[i+1];
+            root=build(0,nodes.size(),nodes);
+        }
+        map(const map &other) {
+            root=0;head=0;
             tail=new node();
             head=tail;
             for(const_iterator it=other.cbegin();it!=other.cend();it++){
@@ -350,6 +356,14 @@ namespace sjtu{
             for(const_iterator it=other.cbegin();it!=other.cend();it++){
                 insert(*it);
             }
+            return *this;
+        }
+        map& operator=(map &&other){
+            if(this==&other)
+                return *this;
+            root=other.root;other.root=0;
+            head=other.head;other.head=0;
+            tail=other.tail;other.tail=0;
             return *this;
         }
         __inline T & at(const Key &k) {

@@ -26,7 +26,7 @@ namespace sjtu {
         }
 
     public:
-
+        typedef T value_type;
         class const_iterator;
         class iterator {
 

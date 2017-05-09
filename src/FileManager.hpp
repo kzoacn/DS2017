@@ -99,15 +99,19 @@ namespace sjtu {
         }
         template<class T1,class T2>
         friend InputOfBinary & operator >> (InputOfBinary & cin, map<T1,T2> & A) {
-            int len;//TODO
-            cin>>len;
+            int len;cin>>len;
             A.clear();
-            for(int i=0;i<len;i++){
+            while(len--){
                 T1 a;T2 b;
                 cin>>a>>b;
                 A[a]=b;
             }
             return cin;
+            /*int len;
+            vector<pair<T1,T2> >vec;
+            cin>>vec;
+            A=map<T1,T2>(vec);
+            return cin;*/
         }
 
 
