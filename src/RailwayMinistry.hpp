@@ -206,6 +206,7 @@ public:
                        // G[way[i]].push_back(e);
                         break;
                     }
+                    break;
                 }
             }
         }
