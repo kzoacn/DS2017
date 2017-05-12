@@ -252,6 +252,7 @@ public:
 	bool updateInfo(string id,string pwd,string name){
 		pwdMap[id]=pwd;
 		nameMap[id]=name;
+        return true;
 	}	
     bool isAdmin(string id){
         if(adminMap.count(id))

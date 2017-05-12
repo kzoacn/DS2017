@@ -8,6 +8,7 @@
 #include "src/Station.hpp"
 #include <QMessageBox>
 #include "minewindow.h"
+#define tr QString::fromLocal8Bit
 using namespace sjtu;
 using std::to_string;
 MainWindow::MainWindow(QWidget *parent) :
@@ -31,7 +32,7 @@ void MainWindow::on_search_clicked()
 {
     QStandardItemModel  *model = new QStandardItemModel();
     model->setColumnCount(16);
-    model->setHeaderData(0,Qt::Horizontal,tr("车次"));
+    model->setHeaderData(0,Qt::Horizontal,QString::fromLocal8Bit("车次"));
     model->setHeaderData(1,Qt::Horizontal,tr("起点"));
     model->setHeaderData(2,Qt::Horizontal,tr("终点"));
     model->setHeaderData(3,Qt::Horizontal,tr("出发时间"));

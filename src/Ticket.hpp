@@ -4,9 +4,10 @@
 #include "lib/Date.hpp"
 #include <QString>
 #include <QDebug>
+#include <string>
 //#include "Ticket.hpp"
 namespace sjtu{
-
+//#define tr QString::fromLocal8Bit
 
 enum TicketLevel{
     SECOND_SEAT=0,//二等座
@@ -75,6 +76,32 @@ public:
         if(level==HARD_BED)return "硬卧";
         return "处女座";
     }
+    static QString to_Qstring(TicketLevel level){
+        if(level==SECOND_SEAT)return QString::fromLocal8Bit("二等座");
+        if(level==FIRST_SEAT)return QString::fromLocal8Bit("一等座");
+        if(level==BUSINESS_SEAT)return QString::fromLocal8Bit("商务座");
+        if(level==SPECIAL_SEAT)return QString::fromLocal8Bit("特等座");
+        if(level==NO_SEAT)return QString::fromLocal8Bit("无座");
+        if(level==SOFT_SEAT)return QString::fromLocal8Bit("软座");
+        if(level==HARD_SEAT)return QString::fromLocal8Bit("硬座");
+        if(level==AD_SOFT_BED)return QString::fromLocal8Bit("高级软卧");
+        if(level==SOFT_BED)return QString::fromLocal8Bit("软卧");
+        if(level==HARD_BED)return QString::fromLocal8Bit("硬卧");
+        return QString::fromLocal8Bit("处女座");
+    }
+    /*static QString to_Qstring(TicketLevel level){
+        if(level==SECOND_SEAT)return tr("二等座");
+        if(level==FIRST_SEAT)return tr("一等座");
+        if(level==BUSINESS_SEAT)return tr("商务座");
+        if(level==SPECIAL_SEAT)return tr("特等座");
+        if(level==NO_SEAT)return tr("无座");
+        if(level==SOFT_SEAT)return tr("软座");
+        if(level==HARD_SEAT)return tr("硬座");
+        if(level==AD_SOFT_BED)return tr("高级软卧");
+        if(level==SOFT_BED)return tr("软卧");
+        if(level==HARD_BED)return tr("硬卧");
+        return tr("处女座");
+    }*/
     bool operator==(const Ticket &oth)const{
 
         qDebug()<<(start==oth.start)<<'\n';

@@ -13,6 +13,7 @@
 #include "src/Station.hpp"
 #include <QMessageBox>
 #include "minewindow.h"
+#define tr QString::fromLocal8Bit
 using namespace sjtu;
 using std::to_string;
 

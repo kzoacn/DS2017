@@ -8,6 +8,7 @@
 #include "minewindow.h"
 #include "src/lib/shared_ptr.hpp"
 
+#define tr QString::fromLocal8Bit
 
 MineWindow::MineWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -49,7 +50,9 @@ void MineWindow::on_queryTicket_clicked()
         model->setItem(i,3,new QStandardItem(QString::fromStdString(tic.getStartDate().to_string())));
         model->setItem(i,4,new QStandardItem(QString::fromStdString(tic.getTargetDate().to_string())));
         model->setItem(i,5,new QStandardItem(QString::number(tic.getTargetDate()-tic.getStartDate())));
-        model->setItem(i,6,new QStandardItem(QString::fromStdString(Ticket::to_string(tic.getLevel()))));
+        QString  level=(Ticket::to_Qstring(tic.getLevel()));
+        model->setItem(i,6,new QStandardItem(level));
+        //model->setItem(i,6,new QStandardItem((Ticket::to_Qstring(tic.getLevel())));
         model->setItem(i,7,new QStandardItem(QString::number(tic.getNum())));
         model->setItem(i,8,new QStandardItem(QString::number(tic.getCost())));
     }
