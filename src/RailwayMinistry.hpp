@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "FileManager.hpp"
 #include "lib/map.hpp"
+#include "lib/deque.hpp"
 #include "lib/set.hpp"
 #include "lib/vector.hpp"
 #include "lib/algo.hpp"
@@ -31,6 +32,7 @@ public:
             vector<Train>ans;
             for(auto id:tmp){
                 Train train=getTrainByID(id);
+                train.init(date);
                 if(train.canSell(date))
                     ans.push_back(train);
             }
@@ -167,6 +169,86 @@ public:
     vector<Ticket> queryTicket(string id){
         return ticketMap[id];
     }
+
+
+
+    struct edge{
+        Station u,v;
+        int st,ed;
+        TicketLevel level;
+        string trainid;
+        bool operator<(const edge &oth)const{
+            return st<oth.st;
+        }
+    };
+    vector<Ticket> queryPath(Station a,Station b,Date date){
+        map<Station,int>dis;dis[b]=2e9;
+        set<Station>inque;
+        map<Station,vector<edge> >G;
+        map<Station,edge>pre;
+        deque<Station>q;
+
+        for(auto x:trainMap){
+            Train &train=x.second;
+            vector<Station>way=train.getWay();
+            for(int i=0;i<way.size();i++){
+                dis[way[i]]=2e9;
+                for(int j=i+1;j<way.size();j++){
+                    edge e;
+                    e.u=way[i],e.v=way[j];
+                    e.st=train.getTimeFromStart(e.u);
+                    e.ed=train.getTimeFromStart(e.v);
+                    e.trainid=train.getID();
+                    for(int l=0;l<10;l++)if(train.canBuy(e.u,e.v,Ticket::toLevel(l))){
+                        e.level=Ticket::toLevel(l);
+                        G[way[i]].push_back(e);
+                        //e.st+=24*60;e.ed+=24*60;
+                       // G[way[i]].push_back(e);
+                        break;
+                    }
+                    break;
+                }
+            }
+        }
+        for(auto &x:G){
+            sort(x.second,0,x.second.size());
+            //reverse(x.second);
+        }
+        q.push_back(a);
+        dis[a]=0;
+        inque.insert(a);
+        while(!q.empty()){
+             Station u=q.front();q.pop_front();inque.erase(u);
+             int now=dis[u];
+             vector<edge>&out=G[u];
+             while(out.size()){
+                 edge e=out.back();
+                 if(e.st>=dis[u]){
+                     if(e.ed<dis[e.v]){
+                         dis[e.v]=e.ed;
+                         pre[e.v]=e;
+                         if(!inque.count(e.v)){
+                             q.push_back(e.v);
+                             inque.insert(e.v);
+                         }
+                     }
+                     out.pop_back();
+                 }else break;
+             }
+        }
+        if(dis[b]==2e9)return vector<Ticket>();
+        vector<Ticket>ans;
+        Station u=b;
+        while(!(u==a)){
+            edge e=pre[u];
+            Train &train=trainMap[e.trainid];
+            ans.push_back(Ticket(e.u,e.v,train.getCost(e.u,e.v,e.level),date+train.getTimeFromStart(e.u),date+train.getTimeFromStart(e.v),e.trainid,e.level,1,date));
+            u=pre[u].u;
+        }
+        reverse(ans);
+        return ans;
+    }
+
 	bool updateInfo(string id,string pwd,string name){
 		pwdMap[id]=pwd;
 		nameMap[id]=name;

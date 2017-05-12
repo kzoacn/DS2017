@@ -34,6 +34,8 @@ private slots:
 
     void on_mine_clicked();
 
+    void on_special_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

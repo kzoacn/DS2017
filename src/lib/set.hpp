@@ -1,4 +1,4 @@
-﻿#define once
+#pragma once
 
 #ifndef SJTU_MAP_HPP
 #define SJTU_MAP_HPP
@@ -6,6 +6,7 @@
 #include <functional>
 #include <cstddef>
 #include "utility.hpp"
+#include "vector.hpp"
 #include "exceptions.hpp"
 
 #define IsBlack(p) (!p || p->color == 1)
@@ -38,14 +39,17 @@ namespace sjtu {
 			}
 
 		};
-
+		
 	public:
+		
 		RBNode* root;
 		RBNode* f;
 		RBNode* _end;
 		RBNode* fir;
 		int _size;
-
+		int index;
+		
+		
 		Compare cmp;
 
 		bool equal(const T &a, const T &b) const {
@@ -273,6 +277,35 @@ namespace sjtu {
 			return;
 		}
 
+		void save(vector<T> &p, vector<int> &q, RBNode* o) const {
+			if(!o) {
+				p.push_back(T());
+				q.push_back(2);	
+				return;
+			}
+			p.push_back(*(o->v));
+			q.push_back(o->color);
+			save(p, q, o->ch[0]);
+			save(p, q, o->ch[1]);
+		}
+
+		void build(int &s, const vector<T> &p, const vector<int> &q, RBNode* &o, RBNode* fa) {
+			int c = q[s];
+			T v = p[s];
+			if(c == 2) return;
+			++_size;
+			o = new RBNode(v, fa, NULL, NULL, c);
+			build(++s, p, q, o->ch[0], o);
+			build(++s, p, q, o->ch[1], o);	
+		}
+		
+		void print(vector<RBNode*> &A, RBNode* o) {
+			if(o->ch[0]) print(A, o->ch[0]);
+			A.push_back(o);
+			if(o->ch[1]) print(A, o->ch[1]);
+ 		}
+		
+		
 	public:
 
 		class const_iterator;
@@ -358,7 +391,7 @@ namespace sjtu {
 				return p != rhs.p || r != rhs.r;
 			}
 
-            T* operator->() const {
+			T* operator->() const noexcept {
 				return r->v;
 			}
 
@@ -449,16 +482,16 @@ namespace sjtu {
 				return p != rhs.p || r != rhs.r;
 			}
 
-            T* operator->() const {
+			T* operator->() const noexcept {
 				return r->v;
 			}
 
 		};
 
-		set() : _size(0), root(NULL), f(NULL) {
-			_end = new RBNode();
-			fir = _end;
-		}
+        set() : _size(0), root(NULL), f(NULL) {
+            _end = new RBNode();
+            fir = _end;
+        }
 
 		set(const set &other) : _size(0), root(NULL), f(NULL) {
 			_end = new RBNode();
@@ -538,6 +571,22 @@ namespace sjtu {
 			return const_iterator(this, _search(e));
 		}
 
+		void save(int &s, vector<T> &p, vector<int> &q) const {
+			save(p, q, root);
+			s = p.size();
+		}
+
+		void build(const vector<T> &p, const vector<int> &q) {
+			clear();
+			index = 0;
+			build(index, p, q, root, NULL);
+			vector<RBNode*> A(_size);
+			print(A, root);
+			fir = A.front();
+			for(int i = 0; i < _size - 1; ++i) A[i]->nex = A[i + 1], A[i + 1]->pre = A[i];
+			A[_size - 1]->nex = _end;
+			_end->pre = A[_size - 1];
+		}
 	};
 }
 
