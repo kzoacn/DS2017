@@ -488,10 +488,10 @@ namespace sjtu {
 
 		};
 
-		set() : _size(0), root(NULL), f(NULL) {
-			_end = new RBNode();
-			fir = _end;
-		}
+        set() : _size(0), root(NULL), f(NULL) {
+            _end = new RBNode();
+            fir = _end;
+        }
 
 		set(const set &other) : _size(0), root(NULL), f(NULL) {
 			_end = new RBNode();

@@ -8,6 +8,8 @@
 #include "utility.hpp"
 #include "FileManager.hpp"
 #include "exceptions.hpp"
+#include "vector.hpp"
+#include "../FileManager.hpp"
 
 #define IsBlack(p) (!p || p->color == 1)
 #define IsRed(p) (!IsBlack(p))
