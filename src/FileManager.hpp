@@ -1,4 +1,4 @@
-﻿#pragma once
+//#pragma once
 
 #ifndef SJTU_FILEMANAGER_HPP
 #define SJTU_FILEMANAGER_HPP
@@ -8,16 +8,17 @@
 #include <cstring>
 #include <iostream>
 //#include "Station.hpp"
-#include "lib/vector.hpp"
-#include "lib/set.hpp"
-#include "lib/map.hpp"
-#include "lib/algo.hpp"
+#include "vector.hpp"
+//#include "set.hpp"
+#include "map.hpp"
+#include "algo.hpp"
 
 #define string std::string
 #define ifstream std::ifstream
 #define ofstream std::ofstream
 #define fstream std::fstream
 
+//using sjtu::map;
 const string inputfile = "input.txt";
 const string outputfile = "output.txt";
 const string logfile = "log.txt";
@@ -88,26 +89,37 @@ namespace sjtu {
         }
         template<class T>
         friend InputOfBinary & operator >> (InputOfBinary & cin, set<T> & A) {
-            int len;//TODO
-            cin>>len;
-            A.clear();
-            for(int i=0;i<len;i++){
-                T c;cin>>c;
-                A.insert(c);
-            }
-            return cin;
+			int len;
+			cin >> len;
+			vector<T> p(len);
+			vector<int> q(len);
+			while(len--) {
+				int type;
+				T v;
+				cin >> v;
+				cin >> type;
+				p.push_back(v);
+				q.push_back(type);
+			}
+			A.build(p, q);
+			return cin;
         }
         template<class T1,class T2>
         friend InputOfBinary & operator >> (InputOfBinary & cin, map<T1,T2> & A) {
-            int len;//TODO
-            cin>>len;
-            A.clear();
-            for(int i=0;i<len;i++){
-                T1 a;T2 b;
-                cin>>a>>b;
-                A[a]=b;
-            }
-            return cin;
+			int len;
+			cin >> len;
+			vector<pair<T1, T2> > p(len);
+			vector<int> q(len);
+			while(len--) {
+				int type;
+				pair<T1, T2> v;
+				cin >> v;
+				cin >> type;
+				p.push_back(v);
+				q.push_back(type);
+			}
+			A.build(p, q);
+			return cin;
         }
 
 
@@ -163,18 +175,30 @@ namespace sjtu {
         }
         template<class T>
         friend OutputOfBinary & operator << (OutputOfBinary & cout, const set<T> & A) {
-            cout<<(int)A.size();//TODO
-            for(typename set<T>::const_iterator it=A.cbegin();it!=A.cend();it++)
-                cout<<(T)*it;
-            return cout;
+			int s;
+			vector<T> p;
+			vector<int> q;
+			A.save(s, p, q);
+			cout << s;
+			for(int i = 0; i < s; ++i) {
+				cout << (T)p[i];
+				cout << q[i];
+			}
+			return cout;
         }
         template<class T1,class T2>
         friend OutputOfBinary & operator << (OutputOfBinary & cout, const map<T1,T2> & A) {
-            cout<<(int)A.size();//TODO
-            for(typename map<T1,T2>::const_iterator it=A.cbegin();it!=A.cend();it++)
-                cout<<(T1)it->first<<(T2)it->second;
-            return cout;
-        }
+			int s;
+			vector<pair<T1, T2> > p;
+			vector<int> q;
+			A.save(s, p, q);
+			cout << s;
+			for(int i = 0; i < s; ++i) {
+				cout << (pair<T1, T2>)p[i];
+				cout << q[i];
+			}
+			return cout;
+        } 
 
         template<class T1,class T2>
         friend OutputOfBinary & operator << (OutputOfBinary & cout, const pair<T1,T2> & A) {

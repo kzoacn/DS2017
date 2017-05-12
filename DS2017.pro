@@ -50,11 +50,17 @@ HEADERS  += mainwindow.h \
     src/lib/exceptions.hpp \
     src/lib/utility.hpp \
     src/LoginManager.hpp \
-    src/Log.hpp
+    src/Log.hpp \
+    src/lib/deque.hpp
 
 FORMS    += mainwindow.ui \
     logindialog.ui \
     adminwindow.ui \
     minewindow.ui
+
+DISTFILES +=
+
+RESOURCES += \
+    res.qrc
 
 

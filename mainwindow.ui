@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>老铁去哪</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="res.qrc">
+    <normaloff>:/new/prefix1/logo.ico</normaloff>:/new/prefix1/logo.ico</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
@@ -32,7 +36,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_4">
+       <widget class="QPushButton" name="special">
         <property name="text">
          <string>转站搜索</string>
         </property>
@@ -165,7 +169,7 @@
      <x>0</x>
      <y>0</y>
      <width>716</width>
-     <height>28</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
@@ -180,7 +184,9 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>pushButton</sender>

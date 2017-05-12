@@ -136,3 +136,44 @@ void MainWindow::on_mine_clicked()
     mine->load(user.id,user.rw);
     mine->show();
 }
+
+void MainWindow::on_special_clicked()
+{
+/*
+    int num;
+    TicketLevel level;
+    string train;
+    double cost;
+    Station start,target;
+    Date startDate,targetDate;
+    Date trainDate;
+*/
+    QStandardItemModel  *model = new QStandardItemModel();
+    model->setColumnCount(8);
+    model->setHeaderData(0,Qt::Horizontal,tr("车次"));
+    model->setHeaderData(1,Qt::Horizontal,tr("起点"));
+    model->setHeaderData(2,Qt::Horizontal,tr("终点"));
+    model->setHeaderData(3,Qt::Horizontal,tr("出发时间"));
+    model->setHeaderData(4,Qt::Horizontal,tr("到达时间"));
+    model->setHeaderData(5,Qt::Horizontal,tr("经过时间"));
+    model->setHeaderData(6,Qt::Horizontal,tr("座位类型"));
+    model->setHeaderData(7,Qt::Horizontal,tr("费用"));
+    Station a,b;
+    a=Station(ui->start->text().toStdString());
+    b=Station(ui->target->text().toStdString());
+    Date date(ui->dateEdit->date());
+    vector<Ticket>tickets=user.queryPath(a,b,date);
+    for(int i=0;i<tickets.size();i++){
+        Ticket tic=tickets[i];
+        model->setItem(i,0,new QStandardItem(QString::fromStdString(tic.getTrain())));
+        model->setItem(i,1,new QStandardItem(QString::fromStdString(tic.getStart().getName())));
+        model->setItem(i,2,new QStandardItem(QString::fromStdString(tic.getTarget().getName())));
+        model->setItem(i,3,new QStandardItem(QString::fromStdString(tic.getStartDate().to_string())));
+        model->setItem(i,4,new QStandardItem(QString::fromStdString(tic.getTargetDate().to_string())));
+        model->setItem(i,5,new QStandardItem(QString::fromStdString(to_string((tic.getTargetDate()-tic.getStartDate())))));
+        model->setItem(i,6,new QStandardItem(QString::fromStdString(Ticket::to_string(tic.getLevel()))));
+        model->setItem(i,7,new QStandardItem(QString::fromStdString(to_string(tic.getCost()))));
+    }
+    ui->tableView->setModel(model);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+}

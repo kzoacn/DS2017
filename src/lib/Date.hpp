@@ -191,7 +191,7 @@ namespace sjtu {
 		Date(const date& dt) :dt(dt) {}
         Date(const Date& ex) :dt(ex.dt) {}
         Date(int y, int m, int d, int h,int min):dt(y,m,d,h,min){}
-        Date to_day(){
+        Date to_day()const{
             return Date(dt.y,dt.m,dt.d,0,0);
         }
         Date(const QDate &date){
