@@ -8,10 +8,10 @@
 #include <cstring>
 #include <iostream>
 //#include "Station.hpp"
-#include "vector.hpp"
+#include "lib/vector.hpp"
 //#include "set.hpp"
-#include "map.hpp"
-#include "algo.hpp"
+#include "lib/map.hpp"
+#include "lib/algo.hpp"
 
 #define string std::string
 #define ifstream std::ifstream
@@ -108,8 +108,8 @@ namespace sjtu {
         friend InputOfBinary & operator >> (InputOfBinary & cin, map<T1,T2> & A) {
 			int len;
 			cin >> len;
-			vector<pair<T1, T2> > p(len);
-			vector<int> q(len);
+            vector<pair<T1, T2> > p;
+            vector<int> q;
 			while(len--) {
 				int type;
 				pair<T1, T2> v;

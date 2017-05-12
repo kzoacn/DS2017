@@ -300,7 +300,8 @@ namespace sjtu {
 		}
 		
 		void print(vector<RBNode*> &A, RBNode* o) {
-			if(o->ch[0]) print(A, o->ch[0]);
+            if(!o) return;
+            if(o->ch[0]) print(A, o->ch[0]);
 			A.push_back(o);
 			if(o->ch[1]) print(A, o->ch[1]);
  		}
@@ -582,10 +583,12 @@ namespace sjtu {
 			build(index, p, q, root, NULL);
 			vector<RBNode*> A(_size);
 			print(A, root);
-			fir = A.front();
-			for(int i = 0; i < _size - 1; ++i) A[i]->nex = A[i + 1], A[i + 1]->pre = A[i];
-			A[_size - 1]->nex = _end;
-			_end->pre = A[_size - 1];
+            if(_size) {
+                fir = A.front();
+                for(int i = 0; i < _size - 1; ++i) A[i]->nex = A[i + 1], A[i + 1]->pre = A[i];
+                A[_size - 1]->nex = _end;
+                _end->pre = A[_size - 1];
+            }
 		}
 	};
 }

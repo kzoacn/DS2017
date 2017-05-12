@@ -6,10 +6,9 @@
 #include <iostream>
 #include "set.hpp"
 #include "utility.hpp"
-#include "FileManager.hpp"
+#include "../FileManager.hpp"
 #include "exceptions.hpp"
 #include "vector.hpp"
-#include "../FileManager.hpp"
 
 #define IsBlack(p) (!p || p->color == 1)
 #define IsRed(p) (!IsBlack(p))
@@ -301,7 +300,8 @@ namespace sjtu {
 			build(++s, p, q, o->ch[1], o);	
 		}
 		
-		void print(vector<RBNode*> &A, RBNode* o) {
+        void print(vector<RBNode*> &A, RBNode* o) {
+            if(!o) return;
 			if(o->ch[0]) print(A, o->ch[0]);
 			A.push_back(o);
 			if(o->ch[1]) print(A, o->ch[1]);
@@ -584,10 +584,12 @@ namespace sjtu {
 			build(index, p, q, root, NULL);
 			vector<RBNode*> A(_size);
 			print(A, root);
-			fir = A.front();
-			for(int i = 0; i < _size - 1; ++i) A[i]->nex = A[i + 1], A[i + 1]->pre = A[i];
-			A[_size - 1]->nex = _end;
-			_end->pre = A[_size - 1];
+            if(_size) {
+                fir = A.front();
+                for(int i = 0; i < _size - 1; ++i) A[i]->nex = A[i + 1], A[i + 1]->pre = A[i];
+                A[_size - 1]->nex = _end;
+                _end->pre = A[_size - 1];
+            }
 		}
 	};
 	
@@ -611,7 +613,7 @@ namespace sjtu {
 
 		typedef typename _set::iterator iterator;
 
-		typedef typename _set::const_iterator const_iterator;
+        typedef typename _set::const_iterator const_iterator;
 
 		iterator find(const Key &key) {
 			return _set::find(value_type(key, T()));
@@ -636,6 +638,14 @@ namespace sjtu {
 			if (it == _set::cend()) throw(index_out_of_bound());
 			return it->second;
 		}
+
+        bool erase(const Key &e) {
+            /*RBNode* x = search(value_type(e, T()));
+            if (!x) return false;
+            remove(x);
+            return true;*/
+            return _set::erase(value_type(e, T()));
+        }
 
 		T & operator[](const Key &key) {
 			return _set::insert(value_type(key, T())).first->second;

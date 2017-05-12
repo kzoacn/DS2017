@@ -24,6 +24,10 @@ public:
         return first==oth.first?second<oth.second:first<oth.first;
     }
 };
+template<class T1,class T2>
+pair<T1,T2>make_pair(const T1 &a,const T2& b){
+    return pair<T1,T2>(a,b);
+}
 
 }
 
