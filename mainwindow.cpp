@@ -172,7 +172,7 @@ void MainWindow::on_special_clicked()
         model->setItem(i,3,new QStandardItem(QString::fromStdString(tic.getStartDate().to_string())));
         model->setItem(i,4,new QStandardItem(QString::fromStdString(tic.getTargetDate().to_string())));
         model->setItem(i,5,new QStandardItem(QString::fromStdString(to_string((tic.getTargetDate()-tic.getStartDate())))));
-        model->setItem(i,6,new QStandardItem(QString::fromStdString(Ticket::to_string(tic.getLevel()))));
+        model->setItem(i,6,new QStandardItem((Ticket::to_Qstring(tic.getLevel()))));
         model->setItem(i,7,new QStandardItem(QString::fromStdString(to_string(tic.getCost()))));
     }
     ui->tableView->setModel(model);

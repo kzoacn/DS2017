@@ -4,6 +4,8 @@
 #include "adminwindow.h"
 #include <QMessageBox>
 #include <QLineEdit>
+
+#define tr QString::fromLocal8Bit
 using namespace sjtu;
 loginDialog::loginDialog(QWidget *parent) :
     QDialog(parent),
@@ -37,7 +39,7 @@ void loginDialog::on_login_clicked()
             if(rm->isAdmin(id)){
                 accept();
             }else{
-                QMessageBox::warning(this,tr("警告"),tr("你没有管理员权限"));
+                QMessageBox::warning(this,QString::fromLocal8Bit("警告"),tr("你没有管理员权限"));
             }
         }else{
             accept();
@@ -76,3 +78,4 @@ void loginDialog::on_checkBox_2_stateChanged(int arg1)
 {
 
 }
+#undef tr

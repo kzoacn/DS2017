@@ -20,7 +20,7 @@ public:
         ans+=id+" ";
         ans+=(ty==1?string("bought"):string("refund"))+" ";
         ans+=std::to_string(ticket.getNum())+" ";
-        ans+=Ticket::to_string(ticket.getLevel())+" ";
+        ans+=Ticket::to_Qstring(ticket.getLevel()).toStdString()+" ";
         ans+="tickets of ";
         ans+=ticket.getTrain()+" ";
         ans+=string("from ")+ticket.getStart().getName()+" to "+ticket.getTarget().getName()+" ";

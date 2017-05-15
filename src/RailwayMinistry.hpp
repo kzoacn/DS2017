@@ -81,7 +81,7 @@ public:
     void exportLog(ofstream &fout){
         for(auto x:Logs){
             fout<<x.to_string()<<'\n';
-            qDebug()<<QString::fromStdString(x.to_string())<<'\n';
+            //qDebug()<<QString::fromStdString(x.to_string())<<'\n';
         }
         fout.close();
     }
