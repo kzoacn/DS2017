@@ -281,11 +281,13 @@ public:
        }
 
        //for test
+    if(!adminMap.count("admin")){
        pwdMap["admin"]="admin";
        nameMap["admin"]="admin";
        adminMap["admin"]=1;
-       pwdMap["user"]="user";
-       nameMap["user"]="user";
+    }
+ //      pwdMap["user"]="user";
+ //      nameMap["user"]="user";
 
     }
     void writeToFile(string output="data.bin"){

@@ -196,8 +196,10 @@ void AdminWindow::on_pushButton_5_clicked()
         return ;
     }
     if(admin.canSell(trainid,date)){
-        admin.endSale(trainid,date);
-        QMessageBox::information(NULL,tr("提示"),tr("已停止发售"));
+       if(admin.endSale(trainid,date))
+         QMessageBox::information(NULL,tr("提示"),tr("已停止发售"));
+       else
+           QMessageBox::information(NULL,tr("提示"),tr("已有票卖出，不能停止"));
     }else{
         admin.startSale(trainid,date);
         QMessageBox::information(NULL,tr("提示"),tr("已开始发售"));

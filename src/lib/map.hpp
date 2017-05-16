@@ -10,7 +10,7 @@
 #include "exceptions.hpp"
 #include "vector.hpp"
 
-#define IsBlack(p) (!p || p->color == 1)
+#define IsBlack(p) (!p || p->color == 'b')
 #define IsRed(p) (!IsBlack(p))
 
 namespace sjtu {
@@ -26,15 +26,15 @@ template<typename T, class Compare = std::less<T> >
 			RBNode* pre;
 			RBNode* nex;
 			T* v;
-			int color;
+			char color;
 
 
-			RBNode() : parent(NULL), color(0), pre(NULL), nex(NULL), v(NULL) {
+			RBNode() : parent(NULL), color('r'), pre(NULL), nex(NULL), v(NULL) {
 				ch[0] = NULL;
 				ch[1] = NULL;
 			}
 
-			RBNode(const T &e, RBNode* p = NULL, RBNode* lc = NULL, RBNode* rc = NULL, int color = 0) : v(new T(e)), parent(p), color(color), pre(NULL), nex(NULL) {
+			RBNode(const T &e, RBNode* p = NULL, RBNode* lc = NULL, RBNode* rc = NULL, char color = 'r') : v(new T(e)), parent(p), color(color), pre(NULL), nex(NULL) {
 				ch[0] = lc;
 				ch[1] = rc;
 			}
@@ -140,7 +140,7 @@ template<typename T, class Compare = std::less<T> >
 
 		void solveDoubleRed(RBNode* x) {
 			if (!x->parent) {
-				root->color = 1;
+				root->color = 'b';
 				return;
 			}
 			RBNode* p = x->parent; if (IsBlack(p)) return;
@@ -149,17 +149,17 @@ template<typename T, class Compare = std::less<T> >
 			if (IsBlack(u)) {
 				RBNode* gp = g->parent;
 				RBNode* r = rotate(x);
-				r->color = 1;
-				r->ch[0]->color = 0;
-				r->ch[1]->color = 0;
+				r->color = 'b';
+				r->ch[0]->color = 'r';
+				r->ch[1]->color = 'r';
 				if (!gp) root = r;
 				else gp->ch[gp->ch[1] == g] = r;
 				r->parent = gp;
 			}
 			else {
-				p->color = 1;
-				u->color = 1;
-				if (g->parent) g->color = 0;
+				p->color = 'b';
+				u->color = 'b';
+				if (g->parent) g->color = 'r';
 				solveDoubleRed(g);
 			}
 		}
@@ -173,25 +173,25 @@ template<typename T, class Compare = std::less<T> >
 				if (IsRed(s->ch[0])) t = s->ch[0];
 				else if (IsRed(s->ch[1])) t = s->ch[1];
 				if (t) {
-					int pc = p->color;
+					char pc = p->color;
 					RBNode* g = p->parent;
 					RBNode* b = rotate(t);
 					b->parent = g;
 					if (!g) root = b;
 					else g->ch[g->ch[1] == p] = b;
-					if (b->ch[0]) b->ch[0]->color = 1;
-					if (b->ch[1]) b->ch[1]->color = 1;
+					if (b->ch[0]) b->ch[0]->color = 'b';
+					if (b->ch[1]) b->ch[1]->color = 'b';
 					b->color = pc;
 				}
 				else {
-					s->color = 0;
-					if (IsRed(p)) p->color = 1;
+					s->color = 'r';
+					if (IsRed(p)) p->color = 'b';
 					else solveDoubleBlack(p);
 				}
 			}
 			else {
-				s->color = 1;
-				p->color = 0;
+				s->color = 'b';
+				p->color = 'r';
 				RBNode* t = s->ch[s->parent->ch[1] == s];
 				f = p;
 				RBNode* g = p->parent;
@@ -261,7 +261,7 @@ template<typename T, class Compare = std::less<T> >
 			f = w->parent;
 			if (w->parent == NULL) root = r;
 			else w->parent->ch[w->parent->ch[1] == w] = r;
-			int pc = w->color;
+			char pc = w->color;
 			if (w != x) {
 				if (f == x) f = w;
 				w->parent = x->parent, w->ch[0] = x->ch[0], w->ch[1] = x->ch[1], w->color = x->color;
@@ -270,8 +270,8 @@ template<typename T, class Compare = std::less<T> >
 				if (x->ch[0]) x->ch[0]->parent = w;
 				if (x->ch[1]) x->ch[1]->parent = w;
 			}
-			if (pc == 1) {
-				if (IsRed(r)) r->color = 1;
+			if (pc == 'b') {
+				if (IsRed(r)) r->color = 'b';
 				else solveDoubleBlack(r);
 			}
 			delete x->v;
@@ -583,14 +583,14 @@ template<typename T, class Compare = std::less<T> >
 			index = 0;
 			_index = 0;
 			build(index, _index, p, q, root, NULL);
-            /*vector<RBNode*> A(_size);
+            vector<RBNode*> A(_size);
 			print(A, root);
             if(_size) {
                 fir = A.front();
                 for(int i = 0; i < _size - 1; ++i) A[i]->nex = A[i + 1], A[i + 1]->pre = A[i];
                 A[_size - 1]->nex = _end;
                 _end->pre = A[_size - 1];
-            }*/
+            }
 		}
 	};
 	
