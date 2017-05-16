@@ -9,7 +9,7 @@
 #include <iostream>
 //#include "Station.hpp"
 #include "lib/vector.hpp"
-//#include "set.hpp"
+//#include "lib/set.hpp"
 #include "lib/map.hpp"
 #include "lib/algo.hpp"
 
@@ -87,35 +87,41 @@ namespace sjtu {
             }
             return cin;
         }
+		
         template<class T>
         friend InputOfBinary & operator >> (InputOfBinary & cin, set<T> & A) {
-			int len;
-			cin >> len;
-			vector<T> p(len);
-			vector<int> q(len);
-			while(len--) {
-				int type;
+			int len1, len2;
+			cin >> len1 >> len2;
+			vector<T> p(len1);
+			vector<int> q(len2);
+			while(len1--) {
 				T v;
 				cin >> v;
-				cin >> type;
 				p.push_back(v);
+			}
+			while(len2--) {
+				int type;
+				cin >> type;
 				q.push_back(type);
 			}
 			A.build(p, q);
 			return cin;
         }
+		
         template<class T1,class T2>
         friend InputOfBinary & operator >> (InputOfBinary & cin, map<T1,T2> & A) {
-			int len;
-			cin >> len;
-            vector<pair<T1, T2> > p;
-            vector<int> q;
-			while(len--) {
-				int type;
+			int len1, len2;
+			cin >> len1 >> len2;
+			vector<pair<T1, T2>> p(len1);
+			vector<int> q(len2);
+			while(len1--) {
 				pair<T1, T2> v;
 				cin >> v;
-				cin >> type;
 				p.push_back(v);
+			}
+			while(len2--) {
+				int type;
+				cin >> type;
 				q.push_back(type);
 			}
 			A.build(p, q);
@@ -175,28 +181,26 @@ namespace sjtu {
         }
         template<class T>
         friend OutputOfBinary & operator << (OutputOfBinary & cout, const set<T> & A) {
-			int s;
+			int s1, s2;
 			vector<T> p;
 			vector<int> q;
-			A.save(s, p, q);
-			cout << s;
-			for(int i = 0; i < s; ++i) {
-				cout << (T)p[i];
-				cout << q[i];
-			}
+			A.save(s1, s2, p, q);
+			cout << s1;
+			cout << s2;
+			for(int i = 0; i < s1; ++i) cout << (T)p[i];
+			for(int i = 0; i < s2; ++i) cout << q[i];
 			return cout;
         }
         template<class T1,class T2>
         friend OutputOfBinary & operator << (OutputOfBinary & cout, const map<T1,T2> & A) {
-			int s;
+			int s1, s2;
 			vector<pair<T1, T2> > p;
 			vector<int> q;
-			A.save(s, p, q);
-			cout << s;
-			for(int i = 0; i < s; ++i) {
-				cout << (pair<T1, T2>)p[i];
-				cout << q[i];
-			}
+			A.save(s1, s2, p, q);
+			cout << s1;
+			cout << s2;
+			for(int i = 0; i < s1; ++i) cout << (pair<T1, T2>)p[i];
+			for(int i = 0; i < s2; ++i) cout << q[i];
 			return cout;
         } 
 

@@ -187,8 +187,8 @@ public:
             Log &lg=Logs.back();
             if(++T%10000==0)
                 qDebug()<<T/10000<<'\n';
-            //for(auto x:vec)
-            //    qDebug()<<QString::fromStdString(x)<<'\n';
+           // for(auto x:vec)
+           //     qDebug()<<QString::fromStdString(x)<<'\n';
             Ticket tic=Ticket(Station(vec[9]),Station(vec[11]),Date::fromDay(vec[13]),vec[7],Ticket::toLevel(vec[4]),to_int(vec[3]));
             lg=Log(vec[1],vec[0],vec[2][0]=='b'?1:0,tic);
         }

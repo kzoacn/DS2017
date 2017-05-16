@@ -15,7 +15,7 @@
 
 namespace sjtu {
 	
-	template<typename T, class Compare = std::less<T> >
+template<typename T, class Compare = std::less<T> >
 	class set {
 
 	protected:
@@ -49,6 +49,7 @@ namespace sjtu {
 		RBNode* fir;
 		int _size;
 		int index;
+		int _index;
 		
 		
 		Compare cmp;
@@ -280,7 +281,6 @@ namespace sjtu {
 
 		void save(vector<T> &p, vector<int> &q, RBNode* o) const {
 			if(!o) {
-				p.push_back(T());
 				q.push_back(2);	
 				return;
 			}
@@ -290,19 +290,18 @@ namespace sjtu {
 			save(p, q, o->ch[1]);
 		}
 
-		void build(int &s, const vector<T> &p, const vector<int> &q, RBNode* &o, RBNode* fa) {
-			int c = q[s];
-			T v = p[s];
+		void build(int &s1, int &s2, const vector<T> &p, const vector<int> &q, RBNode* &o, RBNode* fa) {
+			int c = q[s2];
 			if(c == 2) return;
 			++_size;
-			o = new RBNode(v, fa, NULL, NULL, c);
-			build(++s, p, q, o->ch[0], o);
-			build(++s, p, q, o->ch[1], o);	
+			o = new RBNode(p[s1++], fa, NULL, NULL, c);
+			build(s1, ++s2, p, q, o->ch[0], o);
+			build(s1, ++s2, p, q, o->ch[1], o);	
 		}
 		
-        void print(vector<RBNode*> &A, RBNode* o) {
+		void print(vector<RBNode*> &A, RBNode* o) {
             if(!o) return;
-			if(o->ch[0]) print(A, o->ch[0]);
+            if(o->ch[0]) print(A, o->ch[0]);
 			A.push_back(o);
 			if(o->ch[1]) print(A, o->ch[1]);
  		}
@@ -490,10 +489,10 @@ namespace sjtu {
 
 		};
 
-		set() : _size(0), root(NULL), f(NULL) {
-			_end = new RBNode();
-			fir = _end;
-		}
+        set() : _size(0), root(NULL), f(NULL) {
+            _end = new RBNode();
+            fir = _end;
+        }
 
 		set(const set &other) : _size(0), root(NULL), f(NULL) {
 			_end = new RBNode();
@@ -573,23 +572,25 @@ namespace sjtu {
 			return const_iterator(this, _search(e));
 		}
 
-		void save(int &s, vector<T> &p, vector<int> &q) const {
+		void save(int &s1, int &s2, vector<T> &p, vector<int> &q) const {
 			save(p, q, root);
-			s = p.size();
+			s1 = p.size();
+			s2 = q.size();
 		}
 
 		void build(const vector<T> &p, const vector<int> &q) {
 			clear();
 			index = 0;
-			build(index, p, q, root, NULL);
-			vector<RBNode*> A(_size);
+			_index = 0;
+			build(index, _index, p, q, root, NULL);
+            /*vector<RBNode*> A(_size);
 			print(A, root);
             if(_size) {
                 fir = A.front();
                 for(int i = 0; i < _size - 1; ++i) A[i]->nex = A[i + 1], A[i + 1]->pre = A[i];
                 A[_size - 1]->nex = _end;
                 _end->pre = A[_size - 1];
-            }
+            }*/
 		}
 	};
 	
@@ -656,6 +657,7 @@ namespace sjtu {
 		}
 
 	};
+	
 }
 
 #endif

@@ -38,16 +38,18 @@ public:
     Ticket(const Station &s,const Station &t,const double &c,const Date &sd,const Date &td,const string &tn,const TicketLevel &l,const int &_num,const Date &_tD):
         start(s),target(t),cost(c),startDate(sd),targetDate(td),train(tn),level(l),num(_num),trainDate(_tD){}
     static TicketLevel toLevel(string s){
-        if(QString::fromStdString(s)==QString::fromLocal8Bit("二等座"))return SECOND_SEAT;
-        if(s=="一等座")return FIRST_SEAT;
-        if(s=="商务座")return BUSINESS_SEAT;
-        if(s=="特等座")return SPECIAL_SEAT;
-        if(s=="无座")return NO_SEAT;
-        if(s=="软座")return SOFT_SEAT;
-        if(s=="硬座")return HARD_SEAT;
-        if(s=="高级软卧")return AD_SOFT_BED;
-        if(s=="软卧下")return SOFT_BED;
-        if(s=="硬卧下")return HARD_BED;
+#define ZKY(x,y) if(QString::fromStdString(s)==QString::fromLocal8Bit(x))return y;
+
+        ZKY("二等座",SECOND_SEAT);
+        ZKY("一等座",FIRST_SEAT);
+        ZKY("商务座",BUSINESS_SEAT);
+        ZKY("特等座",SPECIAL_SEAT);
+        ZKY("无座",NO_SEAT);
+        ZKY("软座",SOFT_SEAT);
+        ZKY("硬座",HARD_SEAT);
+        ZKY("高级软卧",AD_SOFT_BED);
+        ZKY("软卧下",SOFT_BED);
+        ZKY("硬卧下",HARD_BED);
         return NO_SEAT;
     }
     static TicketLevel toLevel(int x){
